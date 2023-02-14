@@ -1,0 +1,188 @@
+/* choose us section */
+.choose-us-section {
+  position: relative;
+  padding: 50px 15px;
+
+  @include theme() {
+    background-color: themed("bg_color_one");
+    box-shadow: themed("card_shadow");
+  }
+
+  @media #{$min_992} {
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      @include appDir(right, 0, left, 0);
+      height: 100%;
+      width: 45%;
+      @include appDir(
+        clip-path,
+        polygon(40% 0, 100% 0, 100% 100%, 0% 100%),
+        clip-path,
+        polygon(0 0, 60% 0, 100% 100%, 0% 100%)
+      );
+    }
+
+    &:before {
+      @include theme() {
+        background-color: themed("main_color_one");
+      }
+    }
+
+    &:after {
+      background: url("../assets/images/pattern-overlay.png") fixed center;
+      opacity: 0.07;
+    }
+  }
+
+  .choose-us-content {
+    position: relative;
+    z-index: 1;
+
+    .text-side {
+      // tabs
+      .tabs {
+        padding: {
+          left: 15px;
+          right: 15px;
+        }
+
+        .tab {
+          $padding_size: 20px;
+
+          padding: {
+            left: $padding_size;
+            right: $padding_size;
+          }
+          border: 1px dashed;
+
+          @include theme() {
+            border-color: rgba(themed("t_color_two"), 0.3);
+          }
+
+          &:not(:last-of-type) {
+            margin-bottom: 15px;
+          }
+
+          .tab-title {
+            position: relative;
+            @include flexbox(flex, "", center, "", "", "");
+            height: 50px;
+            padding: {
+              left: $padding_size;
+              right: $padding_size;
+            }
+            margin: {
+              left: -$padding_size;
+              right: -$padding_size;
+            }
+            cursor: pointer;
+            @include transition(0.3s);
+
+            .title {
+              font-size: 17px;
+              margin: 0;
+            }
+
+            .icon {
+              position: absolute;
+              top: 10px;
+              @include appDir(right, -15.5px, left, -15.5px);
+              height: 30px;
+              width: 30px;
+              clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+              @include transition(0.3s);
+
+              @include theme() {
+                background-color: themed("main_color_two");
+              }
+
+              span {
+                display: block;
+                position: absolute;
+                top: 50%;
+                @include appDir(left, 50%, right, 50%);
+                @include ltr_translate(-50%, -50%);
+                @include transition(0.3s);
+
+                @include theme() {
+                  background-color: themed("bg_color_one");
+                }
+
+                &:first-of-type {
+                  height: 10px;
+                  width: 2px;
+                  @include appDir(
+                    transform-origin,
+                    top left,
+                    transform-origin,
+                    top right
+                  );
+                }
+
+                &:last-of-type {
+                  height: 2px;
+                  width: 10px;
+                }
+              }
+            }
+
+            &:hover {
+              .title {
+                @include theme() {
+                  color: themed("main_color_two");
+                }
+              }
+            }
+          }
+
+          .tab-content {
+            padding-bottom: $padding_size;
+            display: none;
+          }
+
+          &.open {
+            .tab-title {
+              .icon {
+                @include theme() {
+                  background-color: themed("bg_color_reverse");
+                }
+
+                span {
+                  &:first-of-type {
+                    @include ltr_rotate_and_translate(90, -50%, -50%);
+                  }
+                }
+              }
+            }
+          }
+
+          &:focus-within {
+            @include focusStyle();
+          }
+        }
+      }
+    }
+
+    // truk image
+    .truk-img-side {
+      @media #{$min_992} {
+        @include flexbox(flex, "", "", "", "", "");
+      }
+
+      @media #{$max_991} {
+        display: none;
+      }
+
+      img {
+        display: block;
+        max-width: 90%;
+        margin: auto;
+      }
+    }
+  }
+}

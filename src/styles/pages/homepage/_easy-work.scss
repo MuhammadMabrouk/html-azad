@@ -1,0 +1,186 @@
+/* easy work section */
+.easy-work-section {
+  padding-bottom: 0;
+  margin-bottom: -100px;
+
+  .section-content {
+    // work steps
+    .work-steps {
+      @include flexbox(flex, "", stretch, "", "", "");
+      position: relative;
+      z-index: 1;
+      border: 1px dashed;
+
+      @include theme() {
+        background-color: themed("bg_color_one");
+        border-color: themed("t_color_two");
+        box-shadow: themed("card_shadow");
+      }
+
+      @media #{$max_991} {
+        flex-direction: column;
+      }
+
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        height: 20px;
+        width: 20px;
+        border-style: solid;
+        border-color: $secondary;
+      }
+
+      &:before {
+        top: -1px;
+        @include appDir(left, -1px, right, -1px);
+        @include appDir(border-width, 2px 0 0 2px, border-width, 2px 2px 0 0);
+      }
+
+      &:after {
+        @include appDir(right, -1px, left, -1px);
+        bottom: -1px;
+        @include appDir(border-width, 0 2px 2px 0, border-width, 0 0 2px 2px);
+      }
+
+      .step {
+        padding: 40px;
+
+        @media #{$min_992} {
+          width: 25%;
+          text-align: center;
+        }
+
+        @media #{$max_991} {
+          @include flexbox(flex, "", center, "", "", "");
+        }
+
+        .step-img {
+          img {
+            display: block;
+            width: 40px;
+            margin: auto;
+            transition: filter 0.3s ease-in-out;
+
+            @include theme() {
+              filter: themed("filterInvert");
+            }
+          }
+
+          @media #{$max_991} {
+            @include appDir(margin-right, 40px, margin-left, 40px);
+          }
+        }
+
+        .step-shape-icon {
+          @media #{$min_992} {
+            margin: {
+              top: 40px;
+              bottom: 40px;
+            }
+          }
+
+          @media #{$max_991} {
+            @include appDir(margin-right, 40px, margin-left, 40px);
+          }
+
+          .rhombus {
+            position: relative;
+            height: 22px;
+            width: 22px;
+            margin: auto;
+            border: 1px solid;
+            @include ltr_rotate(45);
+
+            @include theme() {
+              background-color: themed("bg_color_one");
+              border-color: themed("main_color_two");
+            }
+
+            span {
+              position: absolute;
+              top: 50%;
+              @include appDir(left, 50%, right, 50%);
+              @include ltr_translate_and_rotate(-50%, -50%, 45);
+              display: block;
+              height: 10px;
+              width: 10px;
+              clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+              @include theme() {
+                background-color: themed("main_color_two");
+              }
+            }
+          }
+        }
+
+        &:not(:last-of-type) {
+          .step-shape-icon {
+            position: relative;
+
+            &:before {
+              content: "";
+              display: block;
+              position: absolute;
+              top: 50%;
+              @include appDir(left, 50%, right, 50%);
+
+              @include theme() {
+                border-color: themed("main_color_two");
+              }
+
+              @media #{$min_992} {
+                @include translateY(-50%);
+                width: calc(100% + 80px);
+                border-bottom: 1px dashed;
+              }
+
+              @media #{$max_991} {
+                height: calc(100% + 100px);
+                border-left: 1px dashed;
+              }
+            }
+          }
+        }
+
+        .step-title {
+          font-size: 17px;
+          margin: 0;
+        }
+      }
+    }
+
+    // background pattern
+    .bg-pattern {
+      position: relative;
+      z-index: 0;
+      height: 280px;
+      background-color: $dark;
+      margin-top: -100px;
+
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      &:before {
+        background: url("../assets/images/main-slider/truck-bg.jpg") fixed
+          center;
+        background-size: cover;
+        opacity: 0.5;
+      }
+
+      &:after {
+        background: url("../assets/images/pattern-overlay.png") fixed center;
+        opacity: 0.05;
+      }
+    }
+  }
+}

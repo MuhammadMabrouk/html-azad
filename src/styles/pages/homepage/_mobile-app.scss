@@ -1,0 +1,214 @@
+/* mobile app section */
+.mobile-app {
+  position: relative;
+  background-color: #10101b;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: url("../assets/images/pattern-overlay.png") fixed center;
+    opacity: 0.05;
+  }
+
+  .section-content {
+    position: relative;
+    margin-bottom: -50px;
+
+    .text-area,
+    .img-area {
+      margin-bottom: 50px;
+    }
+
+    .text-area {
+      .section-title {
+        @include appDir(margin-left, -15px, margin-right, -15px);
+      }
+
+      .text-content {
+        color: $light_code;
+        margin: 0;
+      }
+
+      .btns-container {
+        margin-top: 50px;
+
+        @media #{$max_767} {
+          margin-bottom: -30px;
+        }
+
+        a {
+          height: 55px;
+          border-radius: 4px;
+
+          @include theme() {
+            border: 1px dashed themed("main_color_two");
+          }
+
+          &.google-play {
+            .btn-text {
+              .tagline {
+                color: #9d9da7;
+              }
+
+              .title {
+                @include theme() {
+                  color: themed("main_color_two");
+                }
+              }
+            }
+          }
+
+          &.apple {
+            background-color: $light_code;
+
+            .btn-text {
+              &:before {
+                background-color: rgba($dark, 0.2);
+              }
+
+              .tagline {
+                color: #58585b;
+              }
+
+              .title {
+                color: $dark;
+              }
+            }
+          }
+
+          @media #{$min_768} {
+            @include flexbox(inline-flex, "", stretch, "", "", "");
+
+            &:not(:last-of-type) {
+              @include appDir(margin-right, 30px, margin-left, 30px);
+            }
+          }
+
+          @media #{$max_767} {
+            @include flexbox(flex, "", stretch, "", "", "");
+            width: fit-content;
+            margin: {
+              left: auto;
+              right: auto;
+              bottom: 30px;
+            }
+          }
+
+          > div {
+            &.btn-icon {
+              @include flexbox(flex, "", center, center, "", "");
+              width: 55px;
+
+              img {
+                display: block;
+                width: 24px;
+              }
+            }
+
+            &.btn-text {
+              position: relative;
+              @include flexbox(flex, center, center, "", "", wrap);
+              width: 150px;
+              padding: {
+                left: 18px;
+                right: 18px;
+              }
+
+              &:before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 50%;
+                @include translateY(-50%);
+                @include appDir(left, 0, right, 0);
+                height: calc(100% - 20px);
+                width: 1px;
+                background-color: rgba($light_code, 0.2);
+              }
+
+              .tagline {
+                font-size: 11px;
+              }
+
+              .title {
+                width: 100%;
+                font-size: 17px;
+                margin: 0;
+              }
+            }
+          }
+
+          &:focus {
+            @include focusStyle();
+          }
+        }
+      }
+    }
+
+    .img-area {
+      @media #{$max_991} {
+        order: -1;
+      }
+
+      .app-img {
+        @include flexbox(flex, "", "", "", "", "");
+        height: 100%;
+
+        @media #{$min_992} {
+          position: relative;
+          @include appDir(border-left, 1px dashed, border-right, 1px dashed);
+
+          @include theme() {
+            border-color: themed("main_color_one");
+          }
+
+          &:before,
+          &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+          }
+
+          &:before {
+            z-index: 1;
+            @include appDir(left, -10px, right, -10px);
+            height: 19px;
+            width: 19px;
+            @include ltr_rotate_and_translateY(45, -50%);
+            transform-origin: top;
+            background-color: #1b1b25;
+
+            @include theme() {
+              border: 1px solid themed("main_color_one");
+            }
+          }
+
+          &:after {
+            z-index: 2;
+            @include translateY(-50%);
+            @include appDir(left, -5px, right, -5px);
+            height: 9px;
+            width: 9px;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+            @include theme() {
+              background-color: themed("main_color_one");
+            }
+          }
+        }
+
+        img {
+          display: block;
+          max-width: 80%;
+          margin: auto;
+        }
+      }
+    }
+  }
+}

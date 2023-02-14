@@ -1,0 +1,33 @@
+// Import Table of Contents File
+@import "table-of-contents";
+
+// Import Themes File
+@import "layouts/themes";
+
+// Import Variables File
+@import "helpers/variables";
+
+// Import Mixins File
+@import "helpers/mixins";
+
+// Import Animations File
+@import "helpers/animations";
+
+// Import Hover File
+@import "helpers/hover";
+
+// Import Global & Reset File
+@import "global-and-reset";
+
+// Import UI Elements Styles File
+@import "ui-elements/ui-elements";
+
+// Import Components Styles Files
+@import "components/components";
+
+// Import Pages Styles File
+@import "pages/pages";
+
+
+// You can add global styles to this file, and also import other style files
+//--------------------------------------------------------------------------

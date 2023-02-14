@@ -1,0 +1,364 @@
+/* main-slider */
+.main-slider {
+  min-height: 100vh;
+  background: url("../assets/images/main-slider/truck-bg.jpg") fixed center
+    no-repeat;
+  background-size: cover;
+  overflow: hidden;
+
+  .owl-carousel {
+    z-index: initial;
+
+    .owl-stage-outer {
+      overflow: initial;
+
+      .owl-item {
+        .slider-item {
+          min-height: 100vh;
+          align-items: center;
+
+          @media #{$min_992} {
+            padding: {
+              top: 170px;
+              bottom: 130px;
+            }
+          }
+
+          @media #{$max_991} {
+            padding: {
+              top: 100px;
+              bottom: 130px;
+            }
+          }
+
+          // text area
+          .text-area {
+            @media #{$max_991} {
+              order: 1;
+              margin-top: 40px;
+            }
+
+            .title {
+              margin: 0;
+
+              @include theme() {
+                color: themed("main_color_one");
+              }
+
+              @media #{$min_992} {
+                font-size: 50px;
+              }
+
+              @media #{$max_991} {
+                font-size: 42px;
+              }
+            }
+
+            ul {
+              color: $light_code;
+              margin: {
+                top: 40px;
+                bottom: 60px;
+              }
+
+              li {
+                font-size: 17px;
+
+                &:not(:last-of-type) {
+                  margin-bottom: 12px;
+                }
+
+                &:before {
+                  @include appDir(content, "\f0da", content, "\f0d9");
+                  font-family: FontAwesome;
+                  @include appDir(margin-right, 12px, margin-left, 12px);
+
+                  @include theme() {
+                    color: themed("main_color_one");
+                  }
+                }
+              }
+            }
+
+            .btns-container {
+              @include flexbox(flex, "", center, "", "", "");
+
+              a {
+                display: block;
+                height: 40px;
+                line-height: 40px;
+                min-width: 170px;
+                text-align: center;
+                @include appDir(
+                  text-transform,
+                  uppercase,
+                  text-transform,
+                  null
+                );
+                @include appDir(font-weight, 600, font-weight, bold);
+                border: 1px dashed;
+
+                &:not(:last-of-type) {
+                  @include appDir(margin-right, 30px, margin-left, 30px);
+                }
+
+                &:first-of-type {
+                  color: $dark;
+                  border-color: transparent;
+
+                  @include theme() {
+                    background-color: themed("main_color_two");
+                  }
+
+                  &:hover {
+                    color: $light_code;
+
+                    @include theme() {
+                      background-color: transparent;
+                      border-color: themed("main_color_two");
+                    }
+                  }
+                }
+
+                &:last-of-type {
+                  color: $light_code;
+
+                  @include theme() {
+                    border-color: themed("main_color_two");
+                  }
+
+                  &:hover {
+                    color: $dark;
+
+                    @include theme() {
+                      background-color: themed("main_color_two");
+                      border-color: transparent;
+                    }
+                  }
+                }
+
+                &:focus {
+                  @include focusStyle('bg');
+                }
+              }
+            }
+          }
+
+          // image area
+          .img-area {
+            .img {
+              img {
+                display: block;
+                max-width: 90%;
+                margin: auto;
+                @include appDir(transform, null, transform, rotateY(180deg));
+              }
+            }
+          }
+
+          // details area
+          .details-area {
+            @media #{$max_767} {
+              display: none;
+            }
+
+            div {
+              position: relative;
+              color: $light_code;
+              text-align: center;
+              padding: {
+                left: 20px;
+                right: 20px;
+              }
+              border: 1px dashed;
+
+              &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 150%;
+                border-bottom: 1px dashed;
+              }
+
+              &:first-of-type {
+                padding: {
+                  top: 30px;
+                  bottom: 50px;
+                }
+                margin-bottom: -25px;
+                border-bottom: 0;
+                @include appDir(
+                  clip-path,
+                  polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 40px)),
+                  clip-path,
+                  polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%)
+                );
+
+                @include theme() {
+                  border-color: themed("main_color_one");
+                }
+
+                &:after {
+                  @include appDir(right, 0, left, 0);
+                  bottom: 0;
+                  @include appDir(
+                    transform-origin,
+                    right bottom,
+                    transform-origin,
+                    left bottom
+                  );
+
+                  @include theme() {
+                    border-color: themed("main_color_one");
+                  }
+
+                  @media #{$min_1400} {
+                    @include ltr_rotate(11.5);
+                  }
+
+                  @media #{$min_1200_max_1399} {
+                    @include ltr_rotate(14);
+                  }
+
+                  @media #{$min_992_max_1199} {
+                    @include ltr_rotate(17);
+                  }
+
+                  @media #{$max_991} {
+                    @include ltr_rotate(15);
+                  }
+                }
+
+                span {
+                  @media #{$min_1200} {
+                    text-align: end;
+                  }
+                }
+              }
+
+              &:last-of-type {
+                padding: {
+                  top: 50px;
+                  bottom: 30px;
+                }
+                border-color: $light_code;
+                border-top: 0;
+                @include appDir(
+                  clip-path,
+                  polygon(0 0, 100% 40px, 100% 100%, 0 100%),
+                  clip-path,
+                  polygon(0 40px, 100% 0, 100% 100%, 0 100%)
+                );
+
+                &:after {
+                  @include appDir(left, 0, right, 0);
+                  top: 0;
+                  border-color: $light_code;
+                  @include appDir(
+                    transform-origin,
+                    top left,
+                    transform-origin,
+                    top right
+                  );
+
+                  @media #{$min_1400} {
+                    @include ltr_rotate(11.5);
+                  }
+
+                  @media #{$min_1200_max_1399} {
+                    @include ltr_rotate(14);
+                  }
+
+                  @media #{$min_992_max_1199} {
+                    @include ltr_rotate(17);
+                  }
+
+                  @media #{$max_991} {
+                    @include ltr_rotate(15);
+                  }
+                }
+              }
+
+              strong {
+                display: block;
+                line-height: 1;
+
+                @include theme() {
+                  color: themed("main_color_one");
+                }
+
+                @media #{$min_1200} {
+                  font-size: 50px;
+                }
+
+                @media #{$max_1199} {
+                  font-size: 30px;
+                }
+              }
+
+              span {
+                display: block;
+
+                @media #{$min_1200} {
+                  font-size: 20px;
+                }
+
+                @media #{$max_1199} {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .owl-dots {
+      all: initial;
+      @include flexbox(flex, "", center, "", "", "");
+      position: absolute;
+      @include appDir(left, 50%, right, 50%);
+      @include ltr_translateX(-50%);
+      bottom: 100px;
+
+      .owl-dot {
+        all: initial;
+        padding: {
+          top: 5px;
+          bottom: 5px;
+        }
+        cursor: pointer;
+
+        &:not(:last-of-type) {
+          @include appDir(margin-right, 4px, margin-left, 4px);
+        }
+
+        span {
+          all: initial;
+          display: block;
+          height: 2px;
+          width: 50px;
+          background-color: rgba($light_code, 0.3);
+          cursor: pointer;
+          @include transition(0.3s);
+        }
+
+        &.active {
+          span {
+            height: 3px;
+
+            @include theme() {
+              background-color: themed("main_color_one");
+            }
+          }
+        }
+
+        &:hover {
+          span {
+            background-color: rgba($light_code, 0.5);
+          }
+        }
+      }
+    }
+  }
+}

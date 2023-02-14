@@ -1,0 +1,122 @@
+/* 7. News Item Styles */
+/*---------------------*/
+.news-item {
+  $item_img_height: 250px;
+  $item_img_margin_bottom: 30px;
+
+  @media #{$max_767} {
+    position: relative;
+  }
+
+  .item-img {
+    position: relative;
+    display: block;
+    height: $item_img_height;
+    margin-bottom: $item_img_margin_bottom;
+    overflow: hidden;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &:focus {
+      @include focusStyle();
+    }
+  }
+
+  .item-text {
+    $date_box_size: 50px;
+
+    height: calc(100% - (#{$item_img_height} + #{$item_img_margin_bottom}));
+    padding: {
+      top: 20px;
+      bottom: 20px;
+    }
+    @include appDir(padding-left, 25px, padding-right, 25px);
+    border: 1px dashed $secondary;
+
+    @media #{$min_768} {
+      position: relative;
+      width: calc(100% - (#{$date_box_size} / 2));
+      @include appDir(
+        padding-right,
+        $date_box_size,
+        padding-left,
+        $date_box_size
+      );
+    }
+
+    @media #{$max_767} {
+      @include appDir(padding-right, 25px, padding-left, 25px);
+    }
+
+    .title {
+      font-size: 19px;
+      margin-bottom: 15px;
+
+      a {
+        display: block;
+
+        &:hover {
+          color: $secondary;
+        }
+
+        &:focus {
+          @include focusStyle();
+        }
+      }
+    }
+
+    .content {
+      margin: 0;
+    }
+
+    .date {
+      position: absolute;
+
+      @media #{$min_768} {
+        top: 20px;
+        @include appDir(right, -$date_box_size / 2, left, -$date_box_size / 2);
+      }
+
+      @media #{$max_767} {
+        top: -10px;
+        @include appDir(left, $date_box_size / 2, right, $date_box_size / 2);
+      }
+
+      strong {
+        @include flexbox(flex, "", center, center, "", "");
+
+        @media #{$min_768} {
+          height: $date_box_size;
+          width: $date_box_size;
+          font-size: 18px;
+        }
+
+        @media #{$max_767} {
+          height: calc(#{$date_box_size} - 10px);
+          width: calc(#{$date_box_size} - 10px);
+        }
+
+        &:first-of-type {
+          background-color: $secondary;
+          color: $dark;
+        }
+
+        &:last-of-type {
+          @include appDir(text-transform, uppercase, text-transform, null);
+
+          @include theme() {
+            background-color: themed("bg_color_reverse");
+            color: themed("bg_color_one");
+          }
+        }
+      }
+    }
+  }
+}

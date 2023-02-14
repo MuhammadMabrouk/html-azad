@@ -1,0 +1,49 @@
+/* 1. Skip Links Styles */
+/*----------------------*/
+.skip-links {
+  @include flexbox(flex, "", start, center, "", wrap);
+  position: absolute;
+  z-index: 10000;
+  @include appDir(left, 50%, right, 50%);
+  @include ltr_translateX(-50%);
+  background-color: $primary;
+  color: $dark;
+  padding: 7px 11px 4px;
+  border: 3px solid $dark;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  @include transition(0.3s);
+
+  @include theme() {
+    box-shadow: themed("card_shadow");
+  }
+
+  &:not(:focus-within) {
+    top: -100%;
+  }
+
+  &:focus-within {
+    top: 0%;
+  }
+
+  li {
+    &:not(:last-child) {
+      @include appDir(margin-right, 8px, margin-left, 8px);
+    }
+
+    a {
+      display: block;
+      text-decoration: underline;
+      padding: 0 4px;
+      margin-bottom: 4px;
+
+      &:after {
+        content: ',';
+      }
+
+      &:focus {
+        @include focusStyle('dark');
+      }
+    }
+  }
+}

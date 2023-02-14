@@ -1,0 +1,133 @@
+/* our statistics section */
+.our-statistics-section {
+  position: relative;
+  @include appDir(
+    background-image,
+    radial-gradient(closest-side at 32% 60%, #5b3014, #10101b),
+    background-image,
+    radial-gradient(closest-side at 68% 60%, #5b3014, #10101b)
+  );
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: url("../assets/images/pattern-overlay.png") fixed center;
+    opacity: 0.05;
+  }
+
+  .our-statistics-content {
+    $margin_bottom_size: 60px;
+
+    .img-area {
+      @include flexbox(flex, "", "", "", "", "");
+
+      @media #{$max_991} {
+        margin-bottom: $margin_bottom_size;
+      }
+
+      img {
+        display: block;
+        max-width: 90%;
+        margin: auto;
+        @include appDir(transform, rotateY(180deg), transform, null);
+      }
+    }
+
+    .statistics-area {
+      @include flexbox(flex, "", "", "", "", wrap);
+      margin-bottom: -$margin_bottom_size;
+
+      li {
+        position: relative;
+        width: 50%;
+        margin-bottom: $margin_bottom_size;
+
+        &:nth-of-type(odd) {
+          text-align: end;
+          @include appDir(padding-right, 60px, padding-left, 60px);
+
+          .rhombus-shape {
+            position: absolute;
+            z-index: 1;
+            top: 8px;
+            @include appDir(right, -10.5px, left, -10.5px);
+            height: 22px;
+            width: 22px;
+            background-color: #10101b;
+            border: 1px solid;
+            @include ltr_rotate(45);
+
+            @include theme() {
+              border-color: themed("main_color_one");
+            }
+
+            &:after {
+              content: "";
+              display: block;
+              position: absolute;
+              top: 50%;
+              @include appDir(left, 50%, right, 50%);
+              @include ltr_translate_and_rotate(-50%, -50%, 45);
+              display: block;
+              height: 10px;
+              width: 10px;
+              clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+              @include theme() {
+                background-color: themed("main_color_one");
+              }
+            }
+          }
+        }
+
+        &:nth-of-type(2n + 1):not(:nth-last-of-type(-n + 2)) {
+          &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 19px;
+            @include appDir(right, 0, left, 0);
+            height: calc(100% + #{$margin_bottom_size});
+            border-left: 1px dashed;
+
+            @include theme() {
+              border-color: themed("main_color_one");
+            }
+          }
+        }
+
+        &:nth-of-type(even) {
+          text-align: start;
+          @include appDir(padding-left, 60px, padding-right, 60px);
+
+          .rhombus-shape {
+            display: none;
+          }
+        }
+
+        strong {
+          display: block;
+          font-size: 38px;
+          line-height: 1;
+
+          @include theme() {
+            color: themed("main_color_one");
+          }
+        }
+
+        span {
+          display: block;
+          font-size: 15px;
+          @include appDir(font-family, $en_font_one, font-family, $ar_font_one);
+          @include appDir(text-transform, capitalize, text-transform, null);
+          color: $light_code;
+        }
+      }
+    }
+  }
+}

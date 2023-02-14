@@ -1,0 +1,92 @@
+/* 10. Elements Styles */
+/*---------------------*/
+.elements-page {
+  .elements-page-content {
+    $transitionDur: 0.3s;
+    $marginBottom: 30px;
+
+    margin-bottom: -$marginBottom;
+
+    .item {
+      margin-bottom: $marginBottom;
+
+      a {
+        position: relative;
+        display: block;
+        text-align: center;
+        padding: 30px;
+        border: 1px dashed;
+
+        @include theme() {
+          border-color: themed("border_color");
+        }
+
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          display: block;
+          height: 20px;
+          width: 20px;
+          border-style: solid;
+          border-color: $secondary;
+        }
+
+        &:before {
+          top: -1px;
+          @include appDir(left, -1px, right, -1px);
+          @include appDir(border-width, 2px 0 0 2px, border-width, 2px 2px 0 0);
+        }
+
+        &:after {
+          @include appDir(right, -1px, left, -1px);
+          bottom: -1px;
+          @include appDir(border-width, 0 2px 2px 0, border-width, 0 0 2px 2px);
+        }
+
+        .item-img {
+          img {
+            display: block;
+            width: 48px;
+            margin: {
+              left: auto;
+              right: auto;
+            }
+          }
+        }
+
+        .item-title {
+          @include appDir(text-transform, capitalize, text-transform, null);
+          font-size: 20px;
+          margin: 20px 0 0;
+          @include transition($transitionDur);
+        }
+
+        &:hover {
+          margin-top: -10px;
+
+          @include theme() {
+            border-color: themed("main_color_two");
+            box-shadow: themed("card_shadow");
+          }
+
+          .item-title {
+            @include theme() {
+              color: themed("main_color_two");
+            }
+          }
+        }
+
+        &:focus {
+          @include focusStyle();
+        }
+      }
+    }
+  }
+}
+
+.dark_theme .elements-page .item-img {
+  img {
+    filter: invert(1);
+  }
+}

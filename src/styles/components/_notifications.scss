@@ -1,0 +1,85 @@
+/* 12. Toast Notifications Styles */
+/*--------------------------------*/
+// animations
+@keyframes timer {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.notifications-container {
+  position: fixed;
+  top: 100px;
+  @include appDir(right, 25px, left, 25px);
+  z-index: 8000;
+
+  .notification {
+    position: relative;
+    width: 250px;
+    line-height: 1.5;
+    color: #fff;
+    @include appDir(padding, 10px 28px 10px 14px, padding, 10px 14px 10px 28px);
+    animation: fadeInUp 0.3s ease-in-out both;
+
+    &:not(.timer) {
+      .disappearing-time {
+        display: none;
+      }
+    }
+
+    &.timer {
+      .disappearing-time {
+        $height: 3px;
+
+        display: block;
+        position: absolute;
+        @include appDir(left, 0, right, 0);
+        bottom: -$height;
+        height: $height;
+        background-color: inherit;
+        opacity: 0.6;
+        animation-name: timer;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+      }
+    }
+
+    &.success {
+      background-color: $success_color;
+    }
+
+    &.danger {
+      background-color: $danger_color;
+    }
+
+    &.warning {
+      background-color: $warning_color;
+    }
+
+    &.info {
+      background-color: $info_color;
+    }
+
+    &:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+
+    .fa {
+      position: absolute;
+      top: 50%;
+      @include translateY(-50%);
+      @include appDir(right, 12px, left, 12px);
+      cursor: pointer;
+      opacity: 0.7;
+      @include transition(0.3s);
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

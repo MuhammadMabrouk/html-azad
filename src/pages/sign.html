@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Azad is a leading container shipping company that provides reliable, sustainable and safe services to businesses across the Middle East, Red Sea, Arabian Gulf and East Coast of Africa.">
+  <meta name="keywords" content="shipping, egypt, ksa, emirates, dubai, sea, containers, Azad, safety, middle east, red sea, ports, logistics, transportation, cargo, freight, tracking, shipment, quote">
+  <title id="page-title" data-title-sign-in="Sign In - Azad" data-title-sign-up="Sign Up - Azad">title</title>
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@700&display=swap">
+
+  <!-- css libraries file -->
+  <link rel="stylesheet" href="styles/libraries.min.css">
+
+  <!-- main style file -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+  
+  <!-- start preloader-->
+  <div class="preloader">
+    <div class="circle">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
+  </div>
+  <!-- end preloader-->
+
+  <!-- start sign page content -->
+  <div class="sign-page">
+    <div class="container">
+      <div class="sign-page-content">
+        <div class="row">
+  
+          <!-- text box -->
+          <div class="text-box col-lg-6">
+  
+            <!-- sign in text box -->
+            <div class="sign-in-text-box">
+  
+              <!-- logo -->
+              <div class="logo">
+                <a class="logo-img" href="index.html" title="Home">
+                  <img src="assets/images/logo-2.png" alt="logo">
+                </a>
+              </div>
+  
+              <!-- title -->
+              <h2 class="title">Create an account</h2>
+  
+              <!-- brief description -->
+              <p class="brief-desc">
+                Don't have an account yet?
+              </p>
+  
+              <!-- bottom button -->
+              <div class="btns-container">
+                <a class="btn btn-secondary" href="#up" role="button" onclick="changePageType(event)">
+                  Sign Up
+                </a>
+              </div>
+            </div>
+  
+            <!-- sign up text box -->
+            <div class="sign-up-text-box">
+  
+              <!-- logo -->
+              <div class="logo">
+                <a class="logo-img" href="index.html" title="Home">
+                  <img src="assets/images/logo-2.png" alt="logo">
+                </a>
+              </div>
+  
+              <!-- title -->
+              <h2 class="title">Sign In</h2>
+  
+              <!-- brief description -->
+              <p class="brief-desc">
+                Already have an account?
+              </p>
+  
+              <!-- bottom button -->
+              <div class="btns-container">
+                <a class="btn btn-secondary" href="#in" role="button" onclick="changePageType(event)">
+                  Sign In
+                </a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- form box -->
+          <div class="form-box col-lg-6">
+            <div class="form-container">
+  
+              <!-- sign in form -->
+              <form id="signInForm" class="sign-in-form form-styled"
+                data-success-msg="signed in successfully!"
+                data-err-msg="Oops! something went wrong, please try again.">
+                <h1 class="main-title">Sign In</h1>
+  
+                <!-- sign in using email & password -->
+                <div class="group">
+                  <label>Email</label>
+                  <div class="control">
+                    <input class="ltr-dir" type="email" inputmode="email" name="email" placeholder="e.g. john.doe@gmail.com" required>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="Email is required">
+                      <input class="invalid" type="hidden" value="Please enter a valid email address">
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <label>Password</label>
+                  <div class="control">
+                    <input type="password" name="password" placeholder="********" minlength="6" required>
+                    <i class="fa fa-eye action-icon" aria-hidden="true" onclick="togglePasswordVisibility(event)"></i>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="Password is required">
+                      <input class="minLength" type="hidden" value="Password must be at least 6 characters">
+                      <input class="hasSpaces" type="hidden" value="Cannot contain spaces">
+                    </div>
+                  </div>
+                </div>
+                <div class="group keep-logged-and-forgot-password inline">
+                  <div class="control">
+                    <div class="checkbox-container">
+                      <div class="checkbox">
+                        <input id="keepLoggedIn" type="checkbox" name="keepLoggedIn" checked>
+                        <label for="keepLoggedIn"></label>
+                      </div>
+                      <label for="keepLoggedIn">Keep me logged in</label>
+                    </div>
+                  </div>
+                  <a href="#">Forgot password?</a>
+                </div>
+                <div class="group">
+                  <div class="control">
+                    <button class="submit-btn btn btn-dark" type="button" onclick="sendSignInFormData()" disabled>Sign In</button>
+                  </div>
+                </div>
+              </form>
+  
+              <!-- sign up form -->
+              <form id="signUpForm" class="sign-up-form form-styled"
+                data-success-msg="Great! successfully registered!"
+                data-err-msg="Oops! something went wrong, please try again.">
+                <h1 class="main-title">Sign Up</h1>
+  
+                <!-- sign up using email -->
+                <div class="group">
+                  <label>Email</label>
+                  <div class="control">
+                    <input class="ltr-dir" type="email" inputmode="email" name="email" placeholder="e.g. john.doe@gmail.com" required>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="Email is required">
+                      <input class="invalid" type="hidden" value="Please enter a valid email address">
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <label>Password</label>
+                  <div class="control">
+                    <input type="password" name="password" placeholder="********" minlength="6" required>
+                    <i class="fa fa-eye action-icon" aria-hidden="true" onclick="togglePasswordVisibility(event)"></i>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="Password is required">
+                      <input class="minLength" type="hidden" value="Password must be at least 6 characters">
+                      <input class="hasSpaces" type="hidden" value="Cannot contain spaces">
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <label>Confirm Password</label>
+                  <div class="control">
+                    <input type="password" name="confirmPassword" placeholder="********" minlength="6" required>
+                    <i class="fa fa-eye action-icon" aria-hidden="true" onclick="togglePasswordVisibility(event)"></i>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="Please confirm your password">
+                      <input class="passwordFirst" type="hidden" value="Please enter your password first">
+                      <input class="notEqual" type="hidden" value="Passwords must match">
+                    </div>
+                  </div>
+                </div>
+                <div class="group inline">
+                  <div class="control">
+                    <div class="checkbox-container">
+                      <div class="checkbox">
+                        <input id="termsAndConditions" type="checkbox" name="termsAndConditions" required>
+                        <label for="termsAndConditions"></label>
+                      </div>
+                      <label for="termsAndConditions">
+                        I read
+                        <a href="#">Term & Conditions</a>
+                      </label>
+                    </div>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="Terms and Conditions is required">
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <div class="control">
+                    <button class="submit-btn btn btn-dark" type="button" onclick="sendSignUpFormData()" disabled>Sign Up</button>
+                  </div>
+                </div>
+              </form>
+  
+              <!-- sign in & up using social networks -->
+              <div class="social-networks" data-or="OR">
+                <h3 class="title sign-in-title">Sign In With</h3>
+                <h3 class="title sign-up-title">Sign Up With</h3>
+
+                <ul class="icons">
+                  <li class="google">
+                    <button title="Google" onclick="signWithPopup('googleSignIn')">
+                      <i class="fa fa-google" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                  <li class="facebook">
+                    <button title="Facebook" onclick="signWithPopup('fbSignIn')">
+                      <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                  <li class="twitter">
+                    <button title="Twitter" onclick="signWithPopup('twSignIn')">
+                      <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                  <li class="linkedin">
+                    <button title="LinkedIn" onclick="signWithPopup('linkedinSignIn')">
+                      <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+  
+          <!-- text box in mobile -->
+          <div class="text-box text-box-mobile col-md-12">
+  
+            <!-- sign in text box -->
+            <div class="sign-in-text-box">
+  
+              <!-- title -->
+              <h2 class="title">Create an account</h2>
+  
+              <!-- brief description -->
+              <p class="brief-desc">
+                Don't have an account yet?
+              </p>
+  
+              <!-- bottom button -->
+              <div class="btns-container">
+                <a class="btn btn-secondary" href="#up" role="button" onclick="changePageType(event)">
+                  Sign Up
+                </a>
+              </div>
+            </div>
+  
+            <!-- sign up text box -->
+            <div class="sign-up-text-box">
+  
+              <!-- title -->
+              <h2 class="title">
+                Sign In
+              </h2>
+  
+              <!-- brief description -->
+              <p class="brief-desc">
+                Already have an account?
+              </p>
+  
+              <!-- bottom button -->
+              <div class="btns-container">
+                <a class="btn btn-secondary" href="#in" role="button" onclick="changePageType(event)">
+                  Sign In
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end sign page content -->
+
+  <!-- scroll to top button -->
+  <button class="scroll-to-top" title="Back To Top" tabindex="0">
+    <i class="fa fa-angle-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- toast notifications -->
+  <ul class="notifications-container"></ul>
+
+  <!-- js plugins file -->
+  <script src="scripts/plugins.min.js"></script>
+
+  <!-- main script file -->
+  <script src="scripts/main.js"></script>
+</body>
+</html>

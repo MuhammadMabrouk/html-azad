@@ -1,0 +1,15 @@
+// themes file
+@import 'layouts/themes';
+
+// main bootstrap file
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+// overrides bootstrap buttons
+.btn {
+  &.btn-light,
+  &.btn-dark {
+    @include theme() {
+      @extend .btn-#{themed("bg_extend_two")};
+    }
+  }
+}

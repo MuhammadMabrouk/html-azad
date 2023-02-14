@@ -1,0 +1,33 @@
+/* 10. blockquote */
+/*----------------*/
+blockquote {
+  border-style: solid;
+  @include appDir(padding-left, 18px, padding-right, 18px);
+  @include appDir(border-width, 0 0 0 2px, border-width, 0 2px 0 0);
+
+  @include theme() {
+    border-color: themed("main_color_one");
+  }
+
+  @media #{$min_768} {
+    margin: 30px 0;
+  }
+
+  @media #{$max_767} {
+    font-style: italic;
+    margin: 20px 0;
+  }
+
+  p {
+    font-size: 25px;
+    line-height: 1.4 !important;
+
+    @include theme() {
+      color: themed("t_color_one");
+    }
+
+    @media #{$max_767} {
+      font-size: 18px;
+    }
+  }
+}

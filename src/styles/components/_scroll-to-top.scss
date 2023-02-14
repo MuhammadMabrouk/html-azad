@@ -1,0 +1,33 @@
+/* 10. Scroll to Top Button Styles */
+/*---------------------------------*/
+.scroll-to-top {
+  @include flexbox(flex, "", center, center, "", "");
+  position: fixed;
+  z-index: 5000;
+  @include appDir(right, -40px, left, -40px);
+  bottom: 25px;
+  width: 35px;
+  height: 35px;
+  color: $dark;
+  font-size: 20px;
+  @include transition(0.4s);
+  cursor: pointer;
+  opacity: 0.7;
+
+  @include theme() {
+    background-color: themed("main_color_one");
+    box-shadow: themed("card_shadow");
+  }
+
+  &.show-scrollTop {
+    @include appDir(right, 25px, left, 25px);
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:focus {
+    @include focusStyle();
+  }
+}

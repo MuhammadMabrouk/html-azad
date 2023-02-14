@@ -1,0 +1,72 @@
+/* 6. Shipment Tracking Styles */
+/*-----------------------------*/
+.progress-steps {
+  padding-bottom: 0;
+}
+
+.progress-and-details {
+  margin-bottom: -60px;
+
+  .side {
+    margin-bottom: 60px;
+
+    .side-title {
+      margin-bottom: 50px;
+
+      @include theme() {
+        color: themed("main_color_two");
+      }
+    }
+
+    .widget {
+      &:not(:last-child) {
+        margin-bottom: 40px;
+      }
+
+      .widget-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
+
+      .widget-content {
+        p {
+          &:last-child,
+          &:only-child {
+            margin: 0;
+          }
+        }
+
+        a {
+          &:hover {
+            text-decoration: underline;
+
+            @include theme() {
+              color: themed("main_color_two");
+            }
+          }
+
+          &:focus {
+            @include focusStyle();
+          }
+        }
+
+        .details-list {
+          @include flexbox(flex, "", center, "", "", wrap);
+          margin-bottom: -8px;
+
+          li {
+            margin-bottom: 8px;
+
+            &:not(:last-of-type) {
+              @include appDir(margin-right, 30px, margin-left, 30px);
+            }
+
+            .fa {
+              @include appDir(margin-right, 6px, margin-left, 6px);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,330 @@
+/* 9. Ultimate Footer Styles */
+/*---------------------------*/
+footer {
+  .footer-top {
+    background: url("../assets/images/dots-bg.png") fixed center;
+    background-size: contain;
+    background-color: lighten($dark, 4);
+    padding: {
+      top: 80px;
+      bottom: 80px;
+    }
+
+    .widget {
+      margin-bottom: 50px;
+
+      .widget-title {
+        color: $light_code;
+        font-size: 18px;
+        @include appDir(text-transform, uppercase, text-transform, null);
+        margin-bottom: 22px;
+      }
+
+      .widget-content {
+        color: $light_code;
+
+        ul {
+          li {
+            &:not(:last-of-type) {
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+
+      &.social {
+        .widget-content {
+          ul {
+            li {
+              $button_height: 30px;
+              $button_radius: 6px;
+
+              a {
+                @include flexbox(inline-flex, "", center, "", "", "");
+                font-size: 13px;
+
+                .fa {
+                  @include flexbox(flex, "", center, center, "", "");
+                  height: $button_height;
+                  width: $button_height;
+                  background-color: $light_code;
+                  color: $secondary;
+                  @include appDir(
+                    border-radius,
+                    $button_radius 0 0 $button_radius,
+                    border-radius,
+                    0 $button_radius $button_radius 0
+                  );
+                }
+
+                span {
+                  @include flexbox(flex, "", center, "", "", "");
+                  height: $button_height;
+                  min-width: 100px;
+                  @include appDir(
+                    text-transform,
+                    capitalize,
+                    text-transform,
+                    null
+                  );
+                  padding: 0 14px;
+                  border: 1px dashed $primary;
+                  @include appDir(border-left, 0, border-right, 0);
+                  @include appDir(
+                    border-radius,
+                    0 $button_radius $button_radius 0,
+                    border-radius,
+                    $button_radius 0 0 $button_radius
+                  );
+                  @include transition(0.3s);
+                }
+
+                &:hover {
+                  span {
+                    background-color: $dark;
+                  }
+                }
+
+                &:focus {
+                  @include focusStyle();
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.links {
+        .widget-content {
+          ul {
+            li {
+              a {
+                &:before {
+                  @include appDir(content, "\f0da", content, "\f0d9");
+                  font-family: FontAwesome;
+                  color: $primary;
+                  @include appDir(margin-right, 12px, margin-left, 12px);
+                  transition: 0.3s margin ease-in-out;
+                }
+
+                &:hover {
+                  &:before {
+                    @include appDir(margin-right, 16px, margin-left, 16px);
+                  }
+                }
+
+                &:focus {
+                  @include focusStyle();
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.about-and-contact {
+        .widget-content {
+          .footer-logo {
+            margin-bottom: 50px;
+
+            a,
+            img {
+              display: block;
+            }
+
+            a {
+              &:focus {
+                @include focusStyle();
+              }
+            }
+
+            img {
+              max-width: 100%;
+            }
+          }
+
+          .info {
+            li {
+              @include flexbox(flex, "", center, "", "", wrap);
+
+              span {
+                @include appDir(margin-right, 12px, margin-left, 12px);
+
+                @include theme() {
+                  color: themed("t_color_two");
+                }
+              }
+
+              a {
+                word-break: break-word;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+
+                &:focus {
+                  @include focusStyle();
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.newsletter {
+        position: relative;
+        padding: {
+          top: 20px;
+          bottom: 12px;
+        }
+        @include appDir(padding-left, 16px, padding-right, 16px);
+
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          z-index: 1;
+          top: 0;
+          @include appDir(left, 0, right, 0);
+          height: 100%;
+          width: 60px;
+          border: 1px dashed $primary;
+        }
+
+        .widget-title {
+          position: relative;
+          z-index: 2;
+          background-color: lighten($dark, 4);
+          color: $primary;
+          padding-bottom: 2px;
+          margin: 0;
+        }
+
+        .widget-content {
+          position: relative;
+          z-index: 2;
+
+          .form-styled {
+            .group {
+              $group_height: 40px;
+
+              height: $group_height;
+              @include flexbox(flex, "", center, "", "", "");
+
+              input,
+              button {
+                height: $group_height;
+                color: $dark;
+                border: none;
+                outline: none;
+
+                &:focus {
+                  @include focusStyle();
+                }
+              }
+
+              input {
+                display: block;
+                line-height: $group_height;
+                width: calc(100% - #{$group_height});
+                padding: 0 20px;
+              }
+
+              button {
+                @include flexbox(flex, "", center, center, "", "");
+                width: $group_height;
+                background-color: $primary;
+                text-align: center;
+                @include appDir(
+                  border-left,
+                  1px solid $dark,
+                  border-right,
+                  1px solid $dark
+                );
+
+                &:hover {
+                  background-color: $secondary;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .payment-methods {
+      @include flexbox(flex, "", center, end, "", "");
+
+      li {
+        &:not(:first-of-type) {
+          @include appDir(margin-left, 8px, margin-right, 8px);
+        }
+
+        button {
+          @include flexbox(flex, "", center, center, "", "");
+          height: 30px;
+          background-color: $light_code;
+          padding: 4px 6px;
+          border: 1px dashed $primary;
+          border-radius: 5px;
+
+          img {
+            display: block;
+            max-height: 100%;
+          }
+
+          &:focus {
+            @include focusStyle();
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    background-color: $dark;
+
+    .container {
+      font-size: 12px;
+      @include appDir(font-weight, 600, font-weight, bold);
+      padding: {
+        top: 25px;
+        bottom: 25px;
+      }
+
+      .row {
+        > div {
+          color: lighten($dark, 42);
+          
+          @media #{$min_992} {
+            &:last-of-type {
+              text-align: end;
+            }
+          }
+
+          @media #{$max_991} {
+            text-align: center;
+            line-height: 1.4;
+
+            &:first-of-type {
+              margin-bottom: 8px;
+            }
+          }
+        }
+
+        a {
+          color: $primary;
+
+          &:hover {
+            color: $secondary;
+            text-decoration: underline;
+          }
+
+          &:focus {
+            @include focusStyle();
+          }
+        }
+      }
+    }
+  }
+}

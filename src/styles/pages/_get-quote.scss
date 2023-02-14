@@ -1,0 +1,191 @@
+/* 4. Get a Quote Styles */
+/*-----------------------*/
+.get-quote-page {
+  .box-with-border {
+    display: block;
+    position: relative;
+    z-index: 1;
+    padding: 60px 10%;
+    border: 1px dashed;
+
+    &:not(:last-child) {
+      margin-bottom: 35px;
+    }
+
+    @include theme() {
+      border-color: themed("t_color_two");
+    }
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 20px;
+      width: 20px;
+      border-style: solid;
+      border-color: $secondary;
+    }
+
+    &:before {
+      top: -1px;
+      @include appDir(left, -1px, right, -1px);
+      @include appDir(border-width, 2px 0 0 2px, border-width, 2px 2px 0 0);
+    }
+
+    &:after {
+      @include appDir(right, -1px, left, -1px);
+      bottom: -1px;
+      @include appDir(border-width, 0 2px 2px 0, border-width, 0 0 2px 2px);
+    }
+  }
+
+  .request-body {
+    .step-progress {
+      margin-bottom: 80px;
+    }
+
+    .request-preview {
+      text-align: center;
+
+      .buttons-container {
+        margin-top: 20px;
+      }
+    }
+
+    .shipments-form {
+      .step {
+        outline: none;
+        animation: fadeIn 0.3s ease-in-out;
+        display: none;
+      }
+
+      &[data-current-step="1"] {
+        .step:nth-of-type(1) {
+          display: block;
+        }
+      }
+
+      &[data-current-step="2"] {
+        .step:nth-of-type(2) {
+          display: block;
+        }
+      }
+
+      &[data-current-step="1"],
+      &[data-current-step="2"] {
+        .buttons-container {
+          .add-another-btn,
+          .continue-btn {
+            display: none;
+          }
+        }
+      }
+
+      &[data-current-step="3"] {
+        .step:nth-of-type(3) {
+          display: block;
+        }
+
+        .buttons-container {
+          .next-btn {
+            display: none;
+          }
+        }
+      }
+
+      .margin-in-mobile {
+        @media #{$max_767} {
+          margin-bottom: 20px;
+        }
+      }
+
+      .buttons-container {
+        margin-top: 20px;
+
+        @media #{$min_768} {
+          @include flexbox(flex, "", "", between, "", wrap);
+        }
+
+        @media #{$max_767} {
+          margin-bottom: -8px;
+        }
+
+        .btn {
+          @media #{$min_768} {
+            &:not(:last-child) {
+              @include appDir(margin-right, 4px, margin-left, 4px);
+            }
+          }
+
+          @media #{$max_767} {
+            width: 100%;
+            margin-bottom: 8px;
+          }
+
+          &.del-btn,
+          &.prev-btn {
+            @include theme() {
+              background-color: themed("inputs_bg_color");
+              color: themed("t_color_one");
+            }
+
+            &:focus,
+            &.focus {
+              @include theme() {
+                box-shadow: 0 0 0 0.2rem rgba(themed("bg_color_reverse"), 0.25);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.incomplete-request {
+      .request-preview {
+        display: none;
+      }
+    }
+
+    &.completed-request {
+      .shipments-form {
+        display: none;
+      }
+    }
+  }
+
+  .details {
+    .details-content {
+      form {
+        &.disabled {
+          position: relative;
+          opacity: 0.4;
+
+          .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+
+  .confirmation {
+    .confirmation-content {
+      max-width: 600px;
+      text-align: center;
+      margin: auto;
+
+      .msg {
+        color: $success_color;
+        font-size: 26px;
+        line-height: 40px;
+        margin: 40px 0 0;
+      }
+    }
+  }
+}

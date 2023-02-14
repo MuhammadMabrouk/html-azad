@@ -1,0 +1,110 @@
+//*********************************
+//**         Color Codes         **
+//*********************************
+
+$primary: #f1c40f;
+$secondary: #f39c11;
+
+$light_code: #fff;
+$dark: #222224;
+
+// other colors
+$success_color: #28a745;
+$danger_color: #dc3545;
+$warning_color: #ffc107;
+$info_color: #17a2b8;
+
+
+// theme definitions
+$themes: (
+  light_theme: (
+
+    main_color_one: $primary,
+    main_color_two: $secondary,
+
+    bg_color_one: $light_code,
+    bg_color_two: darken($light_code, 10),
+    bg_color_reverse: $dark,
+
+    inputs_bg_color: darken($light_code, 4),
+
+    bg_extend_one: 'light',
+    bg_extend_two: 'dark',
+
+    t_color_one: $dark,
+    t_color_two: lighten($dark, 34),
+
+    border_color: lighten($dark, 70),
+
+    card_shadow: 0 0 7px rgba(0, 0, 0, 0.12),
+
+    filterInvert: invert(0)
+  ),
+
+  dark_theme: (
+    main_color_one: $primary,
+    main_color_two: $secondary,
+
+    bg_color_one: $dark,
+    bg_color_two: lighten($dark, 7),
+    bg_color_reverse: $light_code,
+
+    inputs_bg_color: lighten($dark, 4),
+
+    bg_extend_one: 'dark',
+    bg_extend_two: 'light',
+
+    t_color_one: $light_code,
+    t_color_two: lighten($dark, 50),
+
+    border_color: lighten($dark, 20),
+
+    card_shadow: 0 0 8px rgba(#000, .38),
+
+    filterInvert: invert(1)
+  )
+);
+
+// implementation of themes
+@mixin theme($dir: null, $bodyClass: null, $themes: $themes) {
+
+  // page direction options
+  $page_dir: '';
+
+  @if $dir == ltr {
+
+    $page_dir: 'html[dir="ltr"]';
+
+  } @else if $dir == rtl {
+
+    $page_dir: 'html[dir="rtl"]';
+	}
+
+  // body class options
+  $body_class: '';
+
+  @if $bodyClass != null {
+    $body_class: $bodyClass;
+	}
+
+  @each $theme, $map in $themes {
+
+    #{$page_dir}.#{$theme} #{$body_class} & {
+
+      $theme-map: () !global;
+
+      @each $key, $sub_map in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+
+      @content;
+
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

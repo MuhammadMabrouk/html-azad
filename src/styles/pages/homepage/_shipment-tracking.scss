@@ -1,0 +1,141 @@
+/* shipment tracking section */
+.shipment-tracking {
+  background-color: $primary;
+  padding: {
+    top: 50px;
+    bottom: 50px;
+  }
+  overflow: hidden;
+
+  .shipment-tracking-content {
+    position: relative;
+    padding: 30px 15px 0;
+    margin: {
+      left: initial;
+      right: initial;
+    }
+    border: 1px dashed $light_code;
+
+    .shipment-tracking-bg {
+      position: absolute;
+      z-index: 0;
+      @include appDir(transform, null, transform, rotateY(180deg));
+      overflow: hidden;
+
+      @media #{$min_992} {
+        top: -50px;
+        @include appDir(right, -70px, left, -70px);
+        height: calc(100% + 100px);
+        width: 400px;
+      }
+
+      @media (min-width: 768px) and (max-width: 991px) {
+        top: -50px;
+        @include appDir(right, 0, left, 0);
+        height: calc(100% + 100px);
+        width: 400px;
+      }
+
+      @media #{$max_767} {
+        top: -50px;
+        @include appDir(right, 0, left, 0);
+        height: calc(100% + 100px);
+        width: 100%;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 20px;
+      width: 20px;
+      border-style: solid;
+      border-color: $light_code;
+    }
+
+    &:before {
+      top: -1px;
+      @include appDir(left, -1px, right, -1px);
+      @include appDir(border-width, 2px 0 0 2px, border-width, 2px 2px 0 0);
+    }
+
+    &:after {
+      @include appDir(right, -1px, left, -1px);
+      bottom: -1px;
+      @include appDir(border-width, 0 2px 2px 0, border-width, 0 0 2px 2px);
+    }
+
+    ul,
+    .form-styled {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      li {
+        color: $dark;
+        @include appDir(font-weight, 600, font-weight, bold);
+
+        &:not(:last-of-type) {
+          margin-bottom: 12px;
+        }
+
+        &:before {
+          @include appDir(content, "\f0da", content, "\f0d9");
+          font-family: FontAwesome;
+          @include appDir(margin-right, 12px, margin-left, 12px);
+        }
+      }
+    }
+
+    .form-styled {
+      @include flexbox(flex, "", center, "", "", "");
+
+      .group {
+        $group_height: 40px;
+
+        @include flexbox(flex, "", center, "", "", "");
+        height: $group_height;
+        width: 100%;
+
+        input,
+        button {
+          display: block;
+          height: $group_height;
+          line-height: $group_height;
+          padding: 0 20px;
+          border: none;
+          outline: none;
+
+          &:focus {
+            @include focusStyle('dark');
+          }
+        }
+
+        input {
+          width: 100%;
+          color: $dark;
+        }
+
+        button {
+          min-width: 100px;
+          background-color: $dark;
+          color: $light_code;
+          @include appDir(text-transform, uppercase, text-transform, null);
+
+          &:hover {
+            background-color: $secondary;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+/* 11. dropcaps */
+/*--------------*/
+.dropcaps {
+  @include appDir(float, left, float, right);
+  text-align: center;
+  font-weight: 500;
+  @include appDir(margin-right, 10px, margin-left, 10px);
+
+  &:not(.square):not(.circle) {
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+    font-size: 36px;
+    margin-top: 6px;
+
+    @include theme() {
+      color: themed("main_color_one");
+    }
+  }
+
+  &.square,
+  &.circle {
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    font-size: 1.5em;
+    margin-top: 3px;
+
+    @include theme() {
+      background-color: themed("main_color_one");
+      color: themed("t_color_one");
+    }
+  }
+
+  &.circle {
+    border-radius: 50%;
+  }
+}

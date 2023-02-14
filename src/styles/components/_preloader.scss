@@ -1,0 +1,52 @@
+/* 2. Preloader Styles */
+/*---------------------*/
+.preloader {
+  @include flexbox(flex, "", "", "", "", "");
+  position: fixed;
+  z-index: 11000;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  @include theme() {
+    background-color: themed("bg_color_one");
+  }
+  
+  .circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+
+    .double-bounce1,
+    .double-bounce2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: bounce 2s infinite ease-in-out;
+
+      @include theme() {
+        background-color: themed("main_color_one");
+      }
+
+      &.double-bounce2 {
+        animation-delay: -1s;
+      }
+    }
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(0, 0);
+  }
+
+  50% {
+    transform: scale(1, 1);
+  }
+}

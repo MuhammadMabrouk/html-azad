@@ -1,0 +1,442 @@
+/* 9. User Pages Styles */
+/*----------------------*/
+.user-pages {
+  padding-top: 0;
+
+  .user-pages-content {
+    @media #{$min_992} {
+      @include flexbox(flex, "", start, between, "", "");
+    }
+
+    @media #{$max_991} {
+      @include flexbox(flex, "", start, "", "", wrap);
+    }
+
+    // sidebar
+    .user-sidebar {
+      margin-top: -80px;
+
+      @media #{$min_992} {
+        width: 300px;
+      }
+
+      @media #{$max_991} {
+        width: 100%;
+      }
+
+      .user-avatar {
+        $avatar_size: 300px;
+
+        @include flexbox(flex, "", end, center, "", "");
+        width: $avatar_size;
+        max-width: 100%;
+        margin: 0 auto 70px;
+
+        @media #{$min_768} {
+          height: $avatar_size;
+        }
+
+        @include theme() {
+          background-color: themed("main_color_one");
+        }
+
+        img {
+          width: $avatar_size;
+          max-width: 100%;
+          object-fit: cover;
+
+          @media #{$min_768} {
+            height: $avatar_size;
+          }
+        }
+      }
+
+      .links-list {
+        ul {
+          li {
+            &:not(:last-of-type) {
+              margin-bottom: 35px;
+            }
+
+            a {
+              font-size: 16px;
+
+              @include theme() {
+                color: inherit;
+              }
+
+              &:before,
+              &:after,
+              .rhombus-shape,
+              .rhombus-shape:after {
+                @include transition(0.3s);
+              }
+
+              &:before,
+              .rhombus-shape {
+                @include theme() {
+                  border-color: themed("t_color_two");
+                }
+              }
+
+              &:after,
+              .rhombus-shape:after {
+                @include theme() {
+                  background-color: themed("t_color_two");
+                }
+              }
+
+              &.active,
+              &:hover {
+                @include theme() {
+                  color: themed("main_color_one");
+                }
+
+                &:before,
+                .rhombus-shape {
+                  @include theme() {
+                    border-color: themed("main_color_one");
+                  }
+                }
+
+                &:after,
+                .rhombus-shape:after {
+                  @include theme() {
+                    background-color: themed("main_color_one");
+                  }
+                }
+              }
+
+              &:focus {
+                @include focusStyle();
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // main content
+    main {
+      @media #{$min_992} {
+        width: calc(100% - 350px);
+        padding-top: 50px;
+      }
+
+      @media #{$max_991} {
+        width: 100%;
+        margin-top: 80px;
+      }
+
+      .rhombus-title {
+        margin-bottom: 25px;
+
+        &:not(:first-child) {
+          margin-top: 60px !important;
+        }
+      }
+
+      form {
+        .group {
+          &.buttons-container {
+            text-align: end;
+
+            .btn {
+              &:not(:last-child) {
+                @include appDir(margin-right, 5px, margin-left, 5px);
+              }
+
+              &.cancel-btn {
+                @include theme() {
+                  background-color: themed("inputs_bg_color");
+                  color: themed("t_color_one");
+                }
+
+                &:focus,
+                &.focus {
+                  @include theme() {
+                    box-shadow: 0 0 0 0.2rem
+                      rgba(themed("bg_color_reverse"), 0.25);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.profile-page {
+    .user-pages-content {
+      main {
+        form {
+          .social-networks-group {
+            @include appDir(padding-left, 50px, padding-right, 50px);
+            margin-bottom: 40px;
+
+            .network {
+              position: relative;
+              @include flexbox(flex, "", end, "", "", "");
+
+              &:not(:first-child) {
+                &:before {
+                  content: "";
+                  position: absolute;
+                  @include appDir(left, -41px, right, -41px);
+                  bottom: 40px;
+                  height: 100%;
+                  border-right: 2px dashed;
+
+                  @include theme() {
+                    border-color: themed("bg_color_two");
+                  }
+                }
+              }
+
+              &.two-fields {
+                @media #{$max_767} {
+                  flex-wrap: wrap;
+
+                  .group {
+                    width: calc(100% - 38px);
+                    flex-grow: initial;
+
+                    &:nth-of-type(2) {
+                      position: relative;
+
+                      .control {
+                        position: static;
+
+                        &:before {
+                          content: "";
+                          top: -20px;
+                          height: calc(100% + 20px);
+                        }
+                      }
+                    }
+                  }
+
+                  .remove {
+                    position: absolute;
+                    top: 50%;
+                    @include translateY(-50%);
+                    @include appDir(right, 0, left, 0);
+                  }
+                }
+              }
+
+              .group {
+                flex-grow: 1;
+
+                .control {
+                  &:before,
+                  &:after {
+                    content: "";
+                    position: absolute;
+                  }
+
+                  &:before {
+                    top: 0;
+                    @include appDir(left, -16px, right, -16px);
+                    height: 100%;
+                    width: 2px;
+
+                    @include theme() {
+                      background-color: themed("bg_color_two");
+                    }
+                  }
+
+                  &:after {
+                    top: 50%;
+                    @include translateY(-50%);
+                    @include appDir(left, -41px, right, -41px);
+                    width: 25px;
+                    border-top: 2px dashed;
+
+                    @include theme() {
+                      border-color: themed("bg_color_two");
+                    }
+                  }
+                }
+
+                &:nth-of-type(2) {
+                  .control {
+                    &:before,
+                    &:after {
+                      content: none;
+                    }
+                  }
+                }
+              }
+
+              > div {
+                @media #{$min_768} {
+                  &:not(:first-of-type) {
+                    @include appDir(margin-left, 16px, margin-right, 16px);
+                  }
+                }
+
+                @media #{$max_767} {
+                  &:last-of-type {
+                    @include appDir(margin-left, 16px, margin-right, 16px);
+                  }
+                }
+              }
+
+              .remove {
+                margin-bottom: 29px;
+
+                button {
+                  &:after {
+                    content: none;
+                  }
+                }
+              }
+            }
+
+            .add-new,
+            .remove {
+              button {
+                display: block;
+                position: relative;
+                height: 22px;
+                width: 22px;
+                border-radius: 50%;
+
+                @include theme() {
+                  background-color: themed("bg_color_two");
+                }
+
+                &:before,
+                &:after {
+                  content: "";
+                  display: block;
+                  position: absolute;
+                  top: 50%;
+                  @include appDir(left, 50%, right, 50%);
+                  width: 12px;
+                  height: 2px;
+                  transition: 0.3s;
+
+                  @include theme() {
+                    background-color: themed("bg_color_reverse");
+                  }
+                }
+
+                &:before {
+                  @include ltr_translate(-50%, -50%);
+                }
+
+                &:after {
+                  @include ltr_translate_and_rotate(-50%, -50%, -90);
+                }
+
+                &:hover {
+                  @include theme() {
+                    background-color: themed("main_color_one");
+                  }
+
+                  &:before,
+                  &:after {
+                    @include theme() {
+                      background-color: themed("bg_color_one");
+                    }
+                  }
+                }
+
+                &:focus,
+                &.focus {
+                  @include theme() {
+                    box-shadow: 0 0 0 0.2rem
+                      rgba(themed("bg_color_reverse"), 0.25);
+                  }
+                }
+              }
+            }
+
+            .add-new {
+              position: relative;
+
+              &:before,
+              &:after {
+                content: "";
+                position: absolute;
+              }
+
+              &:before {
+                @include appDir(left, -41px, right, -41px);
+                bottom: 12px;
+                height: 50px;
+                border-right: 2px dashed;
+
+                @include theme() {
+                  border-color: themed("bg_color_two");
+                }
+              }
+
+              &:after {
+                top: 50%;
+                @include translateY(-50%);
+                @include appDir(left, -41px, right, -41px);
+                width: 41px;
+                border-top: 2px dashed;
+
+                @include theme() {
+                  border-color: themed("bg_color_two");
+                }
+              }
+
+              button {
+                z-index: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.favorites-page,
+  &.posts-page {
+    .user-pages-content {
+      main {
+        .news-items {
+          margin-bottom: -50px;
+
+          .news-item {
+            margin-bottom: 50px;
+          }
+        }
+
+        .pagination {
+          margin-top: 40px;
+        }
+      }
+    }
+  }
+
+  &.settings-page {
+    .user-pages-content {
+      main {
+        form {
+          .group {
+            &.avatar-group {
+              @include flexbox(flex, "", center, "", "", wrap);
+
+              > label {
+                width: 100%;
+              }
+
+              .control {
+                &:not(:first-of-type) {
+                  @include appDir(margin-left, 6px, margin-right, 6px);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

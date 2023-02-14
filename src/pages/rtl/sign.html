@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Azad is a leading container shipping company that provides reliable, sustainable and safe services to businesses across the Middle East, Red Sea, Arabian Gulf and East Coast of Africa.">
+  <meta name="keywords" content="shipping, egypt, ksa, emirates, dubai, sea, containers, Azad, safety, middle east, red sea, ports, logistics, transportation, cargo, freight, tracking, shipment, quote">
+  <title id="page-title" data-title-sign-in="تسجيل الدخول - أسد" data-title-sign-up="تسجيل جديد - أسد">title</title>
+  <link rel="icon" href="../assets/favicon.ico">
+  <link rel="stylesheet" href="https://www.fontstatic.com/f=sky-bold,sky">
+
+  <!-- css libraries file -->
+  <link rel="stylesheet" href="../styles/libraries.min.css">
+
+  <!-- main style file -->
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+
+<body>
+  
+  <!-- start preloader-->
+  <div class="preloader">
+    <div class="circle">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
+  </div>
+  <!-- end preloader-->
+
+  <!-- start sign page content -->
+  <div class="sign-page">
+    <div class="container">
+      <div class="sign-page-content">
+        <div class="row">
+  
+          <!-- text box -->
+          <div class="text-box col-lg-6">
+  
+            <!-- sign in text box -->
+            <div class="sign-in-text-box">
+  
+              <!-- logo -->
+              <div class="logo">
+                <a class="logo-img" href="index.html" title="الرئيسية">
+                  <img src="../assets/images/logo-2.png" alt="الشعار">
+                </a>
+              </div>
+  
+              <!-- title -->
+              <h2 class="title">انشئ حساب جديد</h2>
+  
+              <!-- brief description -->
+              <p class="brief-desc">
+                لا تملك حسابا حتى الآن؟
+              </p>
+  
+              <!-- bottom button -->
+              <div class="btns-container">
+                <a class="btn btn-secondary" href="#up" role="button" onclick="changePageType(event)">
+                  تسجيل جديد
+                </a>
+              </div>
+            </div>
+  
+            <!-- sign up text box -->
+            <div class="sign-up-text-box">
+  
+              <!-- logo -->
+              <div class="logo">
+                <a class="logo-img" href="index.html" title="الرئيسية">
+                  <img src="../assets/images/logo-2.png" alt="الشعار">
+                </a>
+              </div>
+  
+              <!-- title -->
+              <h2 class="title">تسجيل الدخول</h2>
+  
+              <!-- brief description -->
+              <p class="brief-desc">
+                لديك حساب بالفعل؟
+              </p>
+  
+              <!-- bottom button -->
+              <div class="btns-container">
+                <a class="btn btn-secondary" href="#in" role="button" onclick="changePageType(event)">
+                  تسجيل الدخول
+                </a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- form box -->
+          <div class="form-box col-lg-6">
+            <div class="form-container">
+  
+              <!-- sign in form -->
+              <form id="signInForm" class="sign-in-form form-styled"
+                data-success-msg="تم تسجيل الدخول بنجاح!"
+                data-err-msg="عفوا! حدث خطأ ما، حاول مرة اخرى.">
+                <h1 class="main-title">تسجيل الدخول</h1>
+  
+                <!-- sign in using email & password -->
+                <div class="group">
+                  <label>البريد الإلكتروني</label>
+                  <div class="control">
+                    <input class="ltr-dir" type="email" inputmode="email" name="email" placeholder="e.g. john.doe@gmail.com" required>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="البريد الإلكتروني مطلوب">
+                      <input class="invalid" type="hidden" value="يرجى إدخال عنوان بريد إلكتروني صالح">
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <label>كلمة المرور</label>
+                  <div class="control">
+                    <input type="password" name="password" placeholder="********" minlength="6" required>
+                    <i class="fa fa-eye action-icon" aria-hidden="true" onclick="togglePasswordVisibility(event)"></i>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="كلمة المرور مطلوبة">
+                      <input class="minLength" type="hidden" value="يجب أن تتكون كلمة المرور 6 أحرف على الأقل">
+                      <input class="hasSpaces" type="hidden" value="لا يمكن أن يحتوي على مسافات">
+                    </div>
+                  </div>
+                </div>
+                <div class="group keep-logged-and-forgot-password inline">
+                  <div class="control">
+                    <div class="checkbox-container">
+                      <div class="checkbox">
+                        <input id="keepLoggedIn" type="checkbox" name="keepLoggedIn" checked>
+                        <label for="keepLoggedIn"></label>
+                      </div>
+                      <label for="keepLoggedIn">البقاء متصلا</label>
+                    </div>
+                  </div>
+                  <a href="#">نسيت كلمة المرور؟</a>
+                </div>
+                <div class="group">
+                  <div class="control">
+                    <button class="submit-btn btn btn-dark" type="button" onclick="sendSignInFormData()" disabled>تسجيل الدخول</button>
+                  </div>
+                </div>
+              </form>
+  
+              <!-- sign up form -->
+              <form id="signUpForm" class="sign-up-form form-styled"
+                data-success-msg="رائع! تم التسجيل بنجاح!"
+                data-err-msg="عفوا! حدث خطأ ما، حاول مرة اخرى.">
+                <h1 class="main-title">تسجيل جديد</h1>
+  
+                <!-- sign up using email -->
+                <div class="group">
+                  <label>البريد الإلكتروني</label>
+                  <div class="control">
+                    <input class="ltr-dir" type="email" inputmode="email" name="email" placeholder="e.g. john.doe@gmail.com" required>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="البريد الإلكتروني مطلوب">
+                      <input class="invalid" type="hidden" value="يرجى إدخال عنوان بريد إلكتروني صالح">
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <label>كلمة المرور</label>
+                  <div class="control">
+                    <input type="password" name="password" placeholder="********" minlength="6" required>
+                    <i class="fa fa-eye action-icon" aria-hidden="true" onclick="togglePasswordVisibility(event)"></i>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="كلمة المرور مطلوبة">
+                      <input class="minLength" type="hidden" value="يجب أن تتكون كلمة المرور 6 أحرف على الأقل">
+                      <input class="hasSpaces" type="hidden" value="لا يمكن أن يحتوي على مسافات">
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <label>تأكيد كلمة المرور</label>
+                  <div class="control">
+                    <input type="password" name="confirmPassword" placeholder="********" minlength="6" required>
+                    <i class="fa fa-eye action-icon" aria-hidden="true" onclick="togglePasswordVisibility(event)"></i>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="يرجى تأكيد كلمة المرور">
+                      <input class="passwordFirst" type="hidden" value="يرجى إدخال كلمة المرور أولاً">
+                      <input class="notEqual" type="hidden" value="يجب مطابقة كلمة المرور">
+                    </div>
+                  </div>
+                </div>
+                <div class="group inline">
+                  <div class="control">
+                    <div class="checkbox-container">
+                      <div class="checkbox">
+                        <input id="termsAndConditions" type="checkbox" name="termsAndConditions" required>
+                        <label for="termsAndConditions"></label>
+                      </div>
+                      <label for="termsAndConditions">
+                        قرأت
+                        <a href="#">الشروط والأحكام</a>
+                      </label>
+                    </div>
+
+                    <!-- validation errors messages -->
+                    <div class="errors-msgs">
+                      <input class="required" type="hidden" value="الشروط والأحكام مطلوبة">
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <div class="control">
+                    <button class="submit-btn btn btn-dark" type="button" onclick="sendSignUpFormData()" disabled>تسجيل جديد</button>
+                  </div>
+                </div>
+              </form>
+  
+              <!-- sign in & up using social networks -->
+              <div class="social-networks" data-or="أو">
+                <h3 class="title sign-in-title">تسجيل الدخول باستخدام</h3>
+                <h3 class="title sign-up-title">تسجيل جديد باستخدام</h3>
+
+                <ul class="icons">
+                  <li class="google">
+                    <button title="جوجل" onclick="signWithPopup('googleSignIn')">
+                      <i class="fa fa-google" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                  <li class="facebook">
+                    <button title="فيسبوك" onclick="signWithPopup('fbSignIn')">
+                      <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                  <li class="twitter">
+                    <button title="تويتر" onclick="signWithPopup('twSignIn')">
+                      <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                  <li class="linkedin">
+                    <button title="لينكد إن" onclick="signWithPopup('linkedinSignIn')">
+                      <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+  
+          <!-- text box in mobile -->
+          <div class="text-box text-box-mobile col-md-12">
+  
+            <!-- sign in text box -->
+            <div class="sign-in-text-box">
+  
+              <!-- title -->
+              <h2 class="title">انشئ حساب جديد</h2>
+  
+              <!-- brief description -->
+              <p class="brief-desc">
+                لا تملك حسابا حتى الآن؟
+              </p>
+  
+              <!-- bottom button -->
+              <div class="btns-container">
+                <a class="btn btn-secondary" href="#up" role="button" onclick="changePageType(event)">
+                  تسجيل جديد
+                </a>
+              </div>
+            </div>
+  
+            <!-- sign up text box -->
+            <div class="sign-up-text-box">
+  
+              <!-- title -->
+              <h2 class="title">
+                تسجيل الدخول
+              </h2>
+  
+              <!-- brief description -->
+              <p class="brief-desc">
+                لديك حساب بالفعل؟
+              </p>
+  
+              <!-- bottom button -->
+              <div class="btns-container">
+                <a class="btn btn-secondary" href="#in" role="button" onclick="changePageType(event)">
+                  تسجيل الدخول
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end sign page content -->
+
+  <!-- scroll to top button -->
+  <button class="scroll-to-top" title="العودة الى الأعلى" tabindex="0">
+    <i class="fa fa-angle-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- toast notifications -->
+  <ul class="notifications-container"></ul>
+
+  <!-- js plugins file -->
+  <script src="../scripts/plugins.min.js"></script>
+
+  <!-- main script file -->
+  <script src="../scripts/main.js"></script>
+</body>
+</html>

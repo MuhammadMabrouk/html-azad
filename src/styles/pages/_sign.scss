@@ -1,0 +1,288 @@
+/* 8. sign in & up Styles */
+/*------------------------*/
+.sign-page {
+  position: relative;
+  background: url("../assets/images/plane-bg.jpg") fixed center no-repeat;
+  background-size: cover;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(#000, 0.8);
+  }
+
+  .sign-page-content {
+    $animationDur: 400ms;
+
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    padding: {
+      top: 60px;
+      bottom: 60px;
+    }
+
+    &.sign-in {
+      .sign-up-page-title {
+        display: none;
+      }
+
+      .text-box {
+        @media #{$min_992} {
+          @include ltr_translateX(100%);
+        }
+
+        .sign-up-text-box {
+          display: none;
+        }
+      }
+
+      .form-box {
+        @media #{$min_992} {
+          @include ltr_translateX(-100%);
+        }
+
+        .sign-up-form {
+          display: none;
+        }
+      }
+
+      .social-networks {
+        .sign-up-title {
+          display: none;
+        }
+      }
+    }
+
+    &:not(.sign-in),
+    &.sign-up {
+      .sign-in-page-title {
+        display: none;
+      }
+
+      .text-box {
+        .sign-in-text-box {
+          display: none;
+        }
+      }
+
+      .form-box {
+        .sign-in-form {
+          display: none;
+        }
+      }
+
+      .social-networks {
+        .sign-in-title {
+          display: none;
+        }
+      }
+    }
+
+    > * {
+      flex-grow: 1;
+      margin: {
+        top: auto;
+        bottom: auto;
+      }
+    }
+
+    // text box
+    .text-box {
+      @include flexbox(flex, "", center, center, "", "");
+      text-align: center;
+      transition: transform $animationDur ease-in-out;
+
+      &:not(.text-box-mobile) {
+        @media #{$max_991} {
+          margin-bottom: 40px;
+
+          .title,
+          .brief-desc,
+          .btns-container {
+            display: none;
+          }
+        }
+      }
+
+      &.text-box-mobile {
+        margin-top: 60px;
+
+        @media #{$min_992} {
+          display: none;
+        }
+      }
+
+      .logo {
+        margin-bottom: 25px;
+
+        a {
+          display: block;
+          width: fit-content;
+          margin: auto;
+
+          &:focus {
+            @include focusStyle();
+          }
+        }
+      }
+
+      .title {
+        color: #fff;
+      }
+
+      .brief-desc {
+        margin: 0;
+      }
+
+      .btns-container {
+        @include appDir(text-transform, uppercase, text-transform, null);
+        margin-top: 40px;
+
+        .btn {
+          color: #fff;
+        }
+      }
+    }
+
+    // form box
+    .form-box {
+      padding: 12px;
+      transition: transform $animationDur ease-in-out;
+
+      @include theme() {
+        background-color: themed("bg_color_one");
+      }
+
+      .form-container {
+        position: relative;
+        padding: 60px 40px;
+        border: 1px dashed $secondary;
+
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          display: block;
+          height: 20px;
+          width: 20px;
+          border-style: solid;
+          border-color: $secondary;
+        }
+
+        &:before {
+          top: -1px;
+          @include appDir(left, -1px, right, -1px);
+          @include appDir(border-width, 2px 0 0 2px, border-width, 2px 2px 0 0);
+        }
+
+        &:after {
+          @include appDir(right, -1px, left, -1px);
+          bottom: -1px;
+          @include appDir(border-width, 0 2px 2px 0, border-width, 0 0 2px 2px);
+        }
+
+        form {
+          .main-title {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 40px;
+          }
+
+          .group {
+            &.keep-logged-and-forgot-password {
+              justify-content: space-between;
+
+              a {
+                text-decoration: underline;
+
+                @include theme() {
+                  color: themed("t_color_one");
+                }
+
+                &:hover {
+                  @include theme() {
+                    color: themed("main_color_two");
+                  }
+                }
+              }
+            }
+
+            .submit-btn {
+              width: 100%;
+              @include appDir(text-transform, uppercase, text-transform, null);
+              margin-top: 30px;
+            }
+          }
+        }
+
+        .social-networks {
+          position: relative;
+          text-align: center;
+          padding-top: 20px;
+          margin-top: 30px;
+          border-top: 1px solid;
+
+          @include theme() {
+            border-color: themed("border_color");
+          }
+
+          &:after {
+            content: attr(data-or);
+            position: absolute;
+            top: 0;
+            @include appDir(left, 50%, right, 50%);
+            @include ltr_translate(-50%, -50%);
+            padding: 0 8px;
+
+            @include theme() {
+              background-color: themed("bg_color_one");
+            }
+          }
+
+          .title {
+            font-size: 18px;
+            margin-bottom: 20px;
+          }
+
+          .icons {
+            cursor: default;
+
+            li {
+              display: inline-block;
+
+              &:not(:last-child) {
+                @include appDir(margin-right, 12px, margin-left, 12px);
+              }
+
+              button {
+                @include flexbox(flex, "", center, center, "", "");
+                height: 35px;
+                width: 35px;
+
+                @include theme() {
+                  color: themed("main_color_two");
+                }
+
+                &:hover {
+                  @include theme() {
+                    background-color: themed("main_color_two");
+                    color: themed("bg_color_one");
+                  }
+                }
+
+                &:focus {
+                  @include focusStyle();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

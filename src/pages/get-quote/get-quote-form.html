@@ -1,0 +1,422 @@
+<!--
+  - add class 'incomplete-request' to show the form and hide the request preview.
+  - add class 'completed-request' to show the request preview and hide the form.
+  * just add one of them.
+-->
+<div class="request-body incomplete-request box-with-border" style="display: none;">
+
+  <!-- steps progress -->
+  <div class="step-progress basic interactive">
+    <ul class="steps">
+      <li class="step active" data-num="1" onclick="goToStep(event, 1)">
+        <strong>Requirements</strong>
+      </li>
+      <li class="step" data-num="2" onclick="goToStep(event, 2)">
+        <strong>Route Info</strong>
+      </li>
+      <li class="step" data-num="3" onclick="goToStep(event, 3)">
+        <strong>Cargo Info</strong>
+      </li>
+    </ul>
+
+    <div class="bar"></div>
+    <div class="fill"></div>
+  </div>
+
+  <!-- request preview -->
+  <div class="request-preview animate__animated animate__fadeInUp">
+    <h5 class="desc">
+      This is a description of my shipment
+    </h5>
+    <div class="buttons-container">
+      <button class="btn btn-primary" onclick="showRequestDetails(event)">
+        Show Details
+      </button>
+    </div>
+  </div>
+
+  <!-- shipments form -->
+  <form id="shipmentsForm_autoUniqueId" class="shipments-form form-styled" data-current-step="1" data-steps-length="3">
+
+    <!-- requirements -->
+    <div class="requirements step" tabindex="-1">
+      <div class="group">
+        <label for="desc_autoUniqueId">Description</label>
+        <div class="control">
+          <textarea id="desc_autoUniqueId" name="desc" placeholder="Add a description of the goods you’re shipping"></textarea>
+        </div>
+      </div>
+      <div class="group">
+        <label class="required-field">Import/Export:</label>
+        <div class="control mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="import_autoUniqueId" type="radio" name="importOrExport" value="import" aria-labelledby="import_label_autoUniqueId" required checked>
+              <label for="import_autoUniqueId"></label>
+            </div>
+            <label id="import_label_autoUniqueId" for="import_autoUniqueId">Import</label>
+          </div>
+        </div>
+        <div class="control mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="export_autoUniqueId" type="radio" name="importOrExport" value="export" aria-labelledby="export_label_autoUniqueId">
+              <label for="export_autoUniqueId"></label>
+            </div>
+            <label id="export_label_autoUniqueId" for="export_autoUniqueId">Export</label>
+          </div>
+        </div>
+      </div>
+      <div class="group row">
+        <label class="required-field col-md-12">Mode of transport:</label>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="oceanFreight_autoUniqueId" type="radio" name="transportMode" value="oceanFreight" aria-labelledby="oceanFreight_label_autoUniqueId" required checked>
+              <label for="oceanFreight_autoUniqueId"></label>
+            </div>
+            <label id="oceanFreight_label_autoUniqueId" for="oceanFreight_autoUniqueId">Ocean Freight</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="roadFreight_autoUniqueId" type="radio" name="transportMode" value="roadFreight" aria-labelledby="roadFreight_label_autoUniqueId">
+              <label for="roadFreight_autoUniqueId"></label>
+            </div>
+            <label id="roadFreight_label_autoUniqueId" for="roadFreight_autoUniqueId">Road Freight</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="airFreight_autoUniqueId" type="radio" name="transportMode" value="airFreight" aria-labelledby="airFreight_label_autoUniqueId">
+              <label for="airFreight_autoUniqueId"></label>
+            </div>
+            <label id="airFreight_label_autoUniqueId" for="airFreight_autoUniqueId">Air Freight</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="railFreight_autoUniqueId" type="radio" name="transportMode" value="railFreight" aria-labelledby="railFreight_label_autoUniqueId">
+              <label for="railFreight_autoUniqueId"></label>
+            </div>
+            <label id="railFreight_label_autoUniqueId" for="railFreight_autoUniqueId">Rail Freight</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="multimodal_autoUniqueId" type="radio" name="transportMode" value="multimodal" aria-labelledby="multimodal_label_autoUniqueId">
+              <label for="multimodal_autoUniqueId"></label>
+            </div>
+            <label id="multimodal_label_autoUniqueId" for="multimodal_autoUniqueId">Multimodal</label>
+          </div>
+        </div>
+      </div>
+      <div class="group containerSize row">
+        <label class="required-field col-md-12">Container Size:</label>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="20_autoUniqueId" type="radio" name="containerSize" value="20'" aria-labelledby="20_label_autoUniqueId" required checked>
+              <label for="20_autoUniqueId"></label>
+            </div>
+            <label id="20_label_autoUniqueId" for="20_autoUniqueId">20'</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="40_autoUniqueId" type="radio" name="containerSize" value="40'" aria-labelledby="40_label_autoUniqueId">
+              <label for="40_autoUniqueId"></label>
+            </div>
+            <label id="40_label_autoUniqueId" for="40_autoUniqueId">40'</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="40_HQ_autoUniqueId" type="radio" name="containerSize" value="40' HQ" aria-labelledby="40_HQ_label_autoUniqueId">
+              <label for="40_HQ_autoUniqueId"></label>
+            </div>
+            <label id="40_HQ_label_autoUniqueId" for="40_HQ_autoUniqueId">40' HQ</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="45_HQ_autoUniqueId" type="radio" name="containerSize" value="45' HQ" aria-labelledby="45_HQ_label_autoUniqueId">
+              <label for="45_HQ_autoUniqueId"></label>
+            </div>
+            <label id="45_HQ_label_autoUniqueId" for="45_HQ_autoUniqueId">45' HQ</label>
+          </div>
+        </div>
+      </div>
+      <div class="group containerType row">
+        <label class="required-field col-md-12">Container Type:</label>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="dry_autoUniqueId" type="radio" name="containerType" value="dry" aria-labelledby="dry_label_autoUniqueId" required checked>
+              <label for="dry_autoUniqueId"></label>
+            </div>
+            <label id="dry_label_autoUniqueId" for="dry_autoUniqueId">Dry</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="openTop_autoUniqueId" type="radio" name="containerType" value="openTop" aria-labelledby="openTop_label_autoUniqueId">
+              <label for="openTop_autoUniqueId"></label>
+            </div>
+            <label id="openTop_label_autoUniqueId" for="openTop_autoUniqueId">Open Top</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="flatRack_autoUniqueId" type="radio" name="containerType" value="flatRack" aria-labelledby="flatRack_label_autoUniqueId">
+              <label for="flatRack_autoUniqueId"></label>
+            </div>
+            <label id="flatRack_label_autoUniqueId" for="flatRack_autoUniqueId">Flat Rack</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="platform_autoUniqueId" type="radio" name="containerType" value="platform" aria-labelledby="platform_label_autoUniqueId">
+              <label for="platform_autoUniqueId"></label>
+            </div>
+            <label id="platform_label_autoUniqueId" for="platform_autoUniqueId">Platform</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="tank_autoUniqueId" type="radio" name="containerType" value="tank" aria-labelledby="tank_label_autoUniqueId">
+              <label for="tank_autoUniqueId"></label>
+            </div>
+            <label id="tank_label_autoUniqueId" for="tank_autoUniqueId">Tank</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="reefer_autoUniqueId" type="radio" name="containerType" value="reefer" aria-labelledby="reefer_label_autoUniqueId">
+              <label for="reefer_autoUniqueId"></label>
+            </div>
+            <label id="reefer_label_autoUniqueId" for="reefer_autoUniqueId">Reefer</label>
+          </div>
+        </div>
+      </div>
+      <div class="group row">
+        <label class="col-md-12">Additional Services:</label>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="checkbox-container">
+            <div class="checkbox">
+              <input id="customsClearance_autoUniqueId" type="checkbox" name="customsClearance" aria-labelledby="customsClearance_label_autoUniqueId">
+              <label for="customsClearance_autoUniqueId"></label>
+            </div>
+            <label id="customsClearance_label_autoUniqueId" for="customsClearance_autoUniqueId">Customs Clearance</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="checkbox-container">
+            <div class="checkbox">
+              <input id="warehousing_autoUniqueId" type="checkbox" name="warehousing" aria-labelledby="warehousing_label_autoUniqueId">
+              <label for="warehousing_autoUniqueId"></label>
+            </div>
+            <label id="warehousing_label_autoUniqueId" for="warehousing_autoUniqueId">Warehousing</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- route info -->
+    <div class="route-info step" tabindex="-1">
+      <div class="group">
+        <label>Place of collection</label>
+        <div class="control">
+          <select name="collectionPlace" form="shipmentsForm_autoUniqueId">
+            <option value="">Select...</option>
+            <option value="city-one">City One</option>
+            <option value="city-two">City Two</option>
+            <option value="city-three">City Three</option>
+            <option value="city-four">City Four</option>
+          </select>
+        </div>
+      </div>
+      <div class="group">
+        <label class="required-field">Port of loading</label>
+        <div class="control">
+          <select name="loadingPort" form="shipmentsForm_autoUniqueId" required>
+            <option value="">Select...</option>
+            <option value="city-one">City One</option>
+            <option value="city-two">City Two</option>
+            <option value="city-three">City Three</option>
+            <option value="city-four">City Four</option>
+          </select>
+        </div>
+      </div>
+      <div class="group">
+        <label class="required-field">Port of discharge</label>
+        <div class="control">
+          <select name="dischargePort" form="shipmentsForm_autoUniqueId" required>
+            <option value="">Select...</option>
+            <option value="city-one">City One</option>
+            <option value="city-two">City Two</option>
+            <option value="city-three">City Three</option>
+            <option value="city-four">City Four</option>
+          </select>
+        </div>
+      </div>
+      <div class="group">
+        <label>Place of delivery</label>
+        <div class="control">
+          <select name="deliveryPlace" form="shipmentsForm_autoUniqueId">
+            <option value="">Select...</option>
+            <option value="city-one">City One</option>
+            <option value="city-two">City Two</option>
+            <option value="city-three">City Three</option>
+            <option value="city-four">City Four</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- cargo info -->
+    <div class="cargo-info step" tabindex="-1">
+      <div class="group">
+        <label>Commodity type</label>
+        <div class="control">
+          <select name="commodityType" form="shipmentsForm_autoUniqueId">
+            <option value="">Select...</option>
+            <option value="meat">Meat</option>
+            <option value="vegetables">Vegetables</option>
+            <option value="foodstuffs">Foodstuffs</option>
+            <option value="plastic-rubber">Plastic / Rubber</option>
+            <option value="metals">Metals</option>
+            <option value="fruits">Fruits</option>
+          </select>
+        </div>
+      </div>
+      <div class="group">
+        <label class="required-field">Weight</label>
+        <div class="control">
+          <div class="custom-number">
+            <input class="number" type="text" name="weight" placeholder="0 KG" min="1" required>
+            <i class="fa fa-angle-up" aria-hidden="true"></i>
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      <div class="group d-md-flex">
+        <label>Unit:</label>
+        <div class="control mb-3 ms-md-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="kg_autoUniqueId" type="radio" name="unit" value="kg" aria-labelledby="kg_label_autoUniqueId" checked>
+              <label for="kg_autoUniqueId"></label>
+            </div>
+            <label id="kg_label_autoUniqueId" for="kg_autoUniqueId">KG</label>
+          </div>
+        </div>
+        <div class="control mb-3 ms-md-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="lbs_autoUniqueId" type="radio" name="unit" value="lbs" aria-labelledby="lbs_label_autoUniqueId">
+              <label for="lbs_autoUniqueId"></label>
+            </div>
+            <label id="lbs_label_autoUniqueId" for="lbs_autoUniqueId">LBS</label>
+          </div>
+        </div>
+      </div>
+      <div class="group d-md-flex">
+        <label>Is this shipment hazardous?</label>
+        <div class="control mb-3 ms-md-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="no_autoUniqueId" type="radio" name="isHazardous" value="false" aria-labelledby="no_label_autoUniqueId" checked>
+              <label for="no_autoUniqueId"></label>
+            </div>
+            <label id="no_label_autoUniqueId" for="no_autoUniqueId">No</label>
+          </div>
+        </div>
+        <div class="control mb-3 ms-md-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="yes_autoUniqueId" type="radio" name="isHazardous" value="true" aria-labelledby="yes_label_autoUniqueId">
+              <label for="yes_autoUniqueId"></label>
+            </div>
+            <label id="yes_label_autoUniqueId" for="yes_autoUniqueId">Yes</label>
+          </div>
+        </div>
+      </div>
+      <div class="margin-in-mobile cargoClassPacking row" style="display: none;">
+        <label class="col-md-12">Please enter the class and packing group if known</label>
+        <div class="group col-md-6">
+          <div class="control">
+            <input type="text" name="cargoClass" placeholder="Class">
+          </div>
+        </div>
+        <div class="group col-md-6">
+          <div class="control">
+            <input type="text" name="cargoPacking" placeholder="Packing">
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="row">
+          <div class="margin-in-mobile col-md-6">
+            <label class="required-field">Shipment volume</label>
+            <div class="control">
+              <select name="shipmentVolume" form="shipmentsForm_autoUniqueId" required>
+                <option value="">Select...</option>
+                <option value="per-annum">Per annum</option>
+                <option value="per-month">Per month</option>
+                <option value="per-week">Per week</option>
+                <option value="one-off">One off</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>Quantity</label>
+            <div class="control">
+              <div class="custom-number">
+                <input class="number" type="text" name="qty" placeholder="0" min="1">
+                <i class="fa fa-angle-up" aria-hidden="true"></i>
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons-container">
+      <div>
+        <button class="del-btn btn" type="button" title="Delete" onclick="clearOrDelete(event)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+        <button class="add-another-btn btn btn-primary animate__animated animate__fadeIn" type="button"
+          onclick="collectShipmentsFormData(event, true)">
+          Add Another
+        </button>
+      </div>
+
+      <div>
+        <button class="prev-btn btn" type="button" onclick="goToPrevStep(event)">Prev</button>
+        <button class="next-btn btn btn-primary" type="button" onclick="goToNextStep(event)">Next</button>
+        <button class="continue-btn btn btn-primary" type="button"
+          onclick="collectShipmentsFormData(event)">
+          Continue
+        </button>
+      </div>
+    </div>
+
+    <!-- form invalid message -->
+    <input class="form-invalid-msg" type="hidden" value="Please fill out all fields marked by asterisk (*)">
+  </form>
+</div>

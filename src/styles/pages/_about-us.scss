@@ -1,0 +1,727 @@
+/* 2. About Us Styles */
+/*--------------------*/
+.about-us-page {
+  // features section
+  .features {
+    .features-content {
+      $transitionDur: 0.3s;
+      $imgSize: 80px;
+      $marginBottom: 30px;
+
+      margin-bottom: -$marginBottom;
+
+      .item {
+        margin-bottom: $marginBottom;
+
+        .item-img {
+          position: relative;
+          display: flex;
+          height: $imgSize;
+          width: $imgSize;
+          margin: {
+            left: auto;
+            right: auto;
+            bottom: -($imgSize / 2);
+          }
+          clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+          @include transition($transitionDur);
+
+          @include theme() {
+            background-color: themed("main_color_one");
+          }
+
+          img {
+            display: block;
+            width: 32px;
+            margin: auto;
+            @include transition($transitionDur);
+          }
+
+          span {
+            display: block;
+            position: absolute;
+            height: 10px;
+            width: 10px;
+            border-style: solid;
+            opacity: 0;
+            @include transition($transitionDur);
+
+            @include theme() {
+              border-color: themed("bg_color_one");
+            }
+
+            &:nth-of-type(1) {
+              top: 15px;
+              @include appDir(left, 50%, right, 50%);
+              @include ltr_translateX_and_rotate(-50%, 45);
+              @include appDir(
+                border-width,
+                1px 0 0 1px,
+                border-width,
+                1px 1px 0 0
+              );
+            }
+
+            &:nth-of-type(2) {
+              top: 50%;
+              @include appDir(right, 15px, left, 15px);
+              @include ltr_translateY_and_rotate(-50%, 45);
+              @include appDir(
+                border-width,
+                1px 1px 0 0,
+                border-width,
+                1px 0 0 1px
+              );
+            }
+
+            &:nth-of-type(3) {
+              bottom: 15px;
+              @include appDir(left, 50%, right, 50%);
+              @include ltr_translateX_and_rotate(-50%, 45);
+              @include appDir(
+                border-width,
+                0 1px 1px 0,
+                border-width,
+                0 0 1px 1px
+              );
+            }
+
+            &:nth-of-type(4) {
+              top: 50%;
+              @include appDir(left, 15px, right, 15px);
+              @include ltr_translateY_and_rotate(-50%, 45);
+              @include appDir(
+                border-width,
+                0 0 1px 1px,
+                border-width,
+                0 1px 1px 0
+              );
+            }
+          }
+        }
+
+        .item-info {
+          height: calc(100% - (#{$imgSize} / 2));
+          text-align: center;
+          padding: 60px 30px 20px;
+          border: 1px dashed;
+          @include transition($transitionDur);
+
+          @include theme() {
+            border-color: themed("border_color");
+          }
+
+          .title {
+            @include appDir(text-transform, capitalize, text-transform, null);
+            font-size: 22px;
+            margin: 0 0 20px;
+            @include transition($transitionDur);
+          }
+
+          .read-more {
+            @include appDir(text-transform, uppercase, text-transform, null);
+            @include appDir(font-weight, 600, font-weight, bold);
+
+            @include theme() {
+              color: themed("t_color_one");
+            }
+
+            &:hover {
+              text-decoration: underline;
+            }
+
+            &:focus {
+              @include focusStyle();
+            }
+          }
+        }
+
+        &:hover {
+          .item-img {
+            @include theme() {
+              background-color: themed("main_color_two");
+            }
+
+            img {
+              @include theme() {
+                filter: invert(1);
+              }
+            }
+
+            span {
+              opacity: 1;
+
+              &:nth-of-type(1) {
+                top: 5px;
+              }
+
+              &:nth-of-type(2) {
+                @include appDir(right, 5px, left, 5px);
+              }
+
+              &:nth-of-type(3) {
+                bottom: 5px;
+              }
+
+              &:nth-of-type(4) {
+                @include appDir(left, 5px, right, 5px);
+              }
+            }
+          }
+
+          .item-info {
+            @include theme() {
+              border-color: themed("main_color_two");
+              box-shadow: themed("card_shadow");
+            }
+
+            .title {
+              @include theme() {
+                color: themed("main_color_two");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // timeline section
+  .timeline {
+    position: relative;
+    background: url("../assets/images/plane-bg.jpg") fixed center no-repeat;
+    background-size: cover;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(#000, 0.8);
+    }
+
+    .timeline-content {
+      .timeline-items {
+        $margin_bottom_size: 10px;
+        $margin_bottom_size_mobile: 60px;
+
+        @media #{$min_992} {
+          margin-bottom: -$margin_bottom_size;
+        }
+
+        @media #{$max_991} {
+          margin-bottom: -$margin_bottom_size_mobile;
+        }
+
+        .item {
+          position: relative;
+
+          @media #{$min_992} {
+            width: 50%;
+            margin-bottom: $margin_bottom_size;
+          }
+
+          @media #{$max_991} {
+            margin-bottom: $margin_bottom_size_mobile;
+          }
+
+          &:not(:last-of-type) {
+            &:after {
+              content: "";
+              display: block;
+              position: absolute;
+              top: 19px;
+              border-left: 1px dashed;
+
+              @include theme() {
+                border-color: themed("main_color_one");
+              }
+
+              @media #{$min_992} {
+                height: calc(100% + #{$margin_bottom_size});
+              }
+
+              @media #{$max_991} {
+                height: calc(100% + #{$margin_bottom_size_mobile});
+              }
+            }
+          }
+
+          .rhombus-shape {
+            position: absolute;
+            z-index: 1;
+            @include appDir(top, 10px, top, 6px);
+            height: 22px;
+            width: 22px;
+            background-color: #1a0d0c;
+            border: 1px solid;
+            @include ltr_rotate(45);
+
+            @include theme() {
+              border-color: themed("main_color_one");
+            }
+
+            &:after {
+              content: "";
+              display: block;
+              position: absolute;
+              top: 50%;
+              @include appDir(left, 50%, right, 50%);
+              @include ltr_translate_and_rotate(-50%, -50%, 45);
+              display: block;
+              height: 10px;
+              width: 10px;
+              clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+              @include theme() {
+                background-color: themed("main_color_one");
+              }
+            }
+          }
+
+          &:nth-of-type(odd) {
+            text-align: end;
+            @include appDir(padding-right, 60px, padding-left, 60px);
+
+            @media #{$min_992} {
+              &:after {
+                @include appDir(right, 0, left, 0);
+              }
+
+              .rhombus-shape {
+                @include appDir(right, -10.5px, left, -10.5px);
+              }
+            }
+
+            @media #{$max_991} {
+              &:after {
+                @include appDir(right, 10.5px, left, 10.5px);
+              }
+
+              .rhombus-shape {
+                @include appDir(right, 0, left, 0);
+              }
+            }
+          }
+
+          &:nth-of-type(even) {
+            @media #{$min_992} {
+              text-align: start;
+              @include appDir(padding-left, 60px, padding-right, 60px);
+              @include appDir(margin-left, auto, margin-right, auto);
+
+              &:after {
+                @include appDir(left, 0, right, 0);
+              }
+
+              .rhombus-shape {
+                @include appDir(left, -10.5px, right, -10.5px);
+              }
+            }
+
+            @media #{$max_991} {
+              text-align: end;
+              @include appDir(padding-right, 60px, padding-left, 60px);
+
+              &:after {
+                @include appDir(right, 10.5px, left, 10.5px);
+              }
+
+              .rhombus-shape {
+                @include appDir(right, 0, left, 0);
+              }
+            }
+          }
+
+          .title {
+            font-size: 38px;
+            line-height: 1;
+            margin-bottom: 20px;
+
+            @include theme() {
+              color: themed("main_color_one");
+            }
+          }
+
+          .content {
+            color: $light_code;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  // why choose us
+  .choose-us {
+    .choose-us-content {
+      // tabs
+      .tabs {
+        @media #{$max_576} {
+          @include appDir(padding-right, 30px, padding-left, 30px);
+        }
+
+        .tab {
+          $padding_size: 20px;
+
+          padding: {
+            left: $padding_size;
+            right: $padding_size;
+          }
+          border: 1px dashed;
+
+          @include theme() {
+            border-color: rgba(themed("t_color_two"), 0.3);
+          }
+
+          &:not(:last-of-type) {
+            margin-bottom: 15px;
+          }
+
+          .tab-title {
+            position: relative;
+            @include flexbox(flex, "", center, "", "", "");
+            height: 50px;
+            padding: {
+              left: $padding_size;
+              right: $padding_size;
+            }
+            margin: {
+              left: -$padding_size;
+              right: -$padding_size;
+            }
+            cursor: pointer;
+            @include transition(0.3s);
+
+            .title {
+              font-size: 17px;
+              margin: 0;
+            }
+
+            .icon {
+              position: absolute;
+              top: 10px;
+              @include appDir(right, -15.5px, left, -15.5px);
+              height: 30px;
+              width: 30px;
+              clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+              @include transition(0.3s);
+
+              @include theme() {
+                background-color: themed("main_color_two");
+              }
+
+              span {
+                display: block;
+                position: absolute;
+                top: 50%;
+                @include appDir(left, 50%, right, 50%);
+                @include ltr_translate(-50%, -50%);
+                @include transition(0.3s);
+
+                @include theme() {
+                  background-color: themed("bg_color_one");
+                }
+
+                &:first-of-type {
+                  height: 10px;
+                  width: 2px;
+                  @include appDir(
+                    transform-origin,
+                    top left,
+                    transform-origin,
+                    top right
+                  );
+                }
+
+                &:last-of-type {
+                  height: 2px;
+                  width: 10px;
+                }
+              }
+            }
+
+            &:hover {
+              .title {
+                @include theme() {
+                  color: themed("main_color_two");
+                }
+              }
+            }
+          }
+
+          .tab-content {
+            padding-bottom: $padding_size;
+            display: none;
+          }
+
+          &.open {
+            .tab-title {
+              .icon {
+                @include theme() {
+                  background-color: themed("bg_color_reverse");
+                }
+
+                span {
+                  &:first-of-type {
+                    @include ltr_rotate_and_translate(90, -50%, -50%);
+                  }
+                }
+              }
+            }
+          }
+
+          &:focus-within {
+            @include focusStyle();
+          }
+        }
+      }
+
+      // truk image
+      .truk-img-side {
+        @media #{$min_992} {
+          @include flexbox(flex, "", "", "", "", "");
+        }
+
+        @media #{$max_991} {
+          display: none;
+        }
+
+        img {
+          display: block;
+          max-width: 90%;
+          margin: auto;
+        }
+      }
+    }
+  }
+
+  // our skills
+  .our-skills {
+    position: relative;
+    background: url("../assets/images/plane-bg-2.jpg") fixed center no-repeat;
+    background-size: cover;
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(#000, 0.8);
+
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url("../assets/images/pattern-overlay.png") fixed center;
+        opacity: 0.07;
+      }
+    }
+
+    .our-skills-content {
+      $margin_bottom_size: 60px;
+
+      position: relative;
+      margin-bottom: -$margin_bottom_size;
+
+      .img-side,
+      .text-side {
+        margin-bottom: $margin_bottom_size;
+      }
+
+      .img-side {
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .text-side {
+        color: $light_code;
+
+        .desc {
+          margin: 0 0 40px;
+        }
+
+        .skills-items {
+          .title,
+          .bar strong {
+            color: $light_code;
+          }
+        }
+      }
+    }
+  }
+
+  // shipment tracking
+  .about-page-shipment-tracking {
+    padding: {
+      top: 50px;
+      bottom: 50px;
+    }
+    overflow: hidden;
+
+    .shipment-tracking-content {
+      position: relative;
+      padding: 30px 15px 0;
+      margin: {
+        left: initial;
+        right: initial;
+      }
+      border: 1px dashed;
+
+      @include theme() {
+        border-color: themed("main_color_one");
+      }
+
+      .shipment-tracking-bg {
+        position: absolute;
+        z-index: 0;
+        @include appDir(transform, null, transform, rotateY(180deg));
+        overflow: hidden;
+
+        @media #{$min_992} {
+          top: -50px;
+          @include appDir(right, -70px, left, -70px);
+          height: calc(100% + 100px);
+          width: 400px;
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+          top: -50px;
+          @include appDir(right, 0, left, 0);
+          height: calc(100% + 100px);
+          width: 400px;
+        }
+
+        @media #{$max_767} {
+          top: -50px;
+          @include appDir(right, 0, left, 0);
+          height: calc(100% + 100px);
+          width: 100%;
+        }
+
+        img {
+          display: block;
+          width: 100%;
+          filter: contrast(0.5);
+        }
+      }
+
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        height: 20px;
+        width: 20px;
+        border-style: solid;
+
+        @include theme() {
+          border-color: themed("main_color_two");
+        }
+      }
+
+      &:before {
+        top: -1px;
+        @include appDir(left, -1px, right, -1px);
+        @include appDir(border-width, 2px 0 0 2px, border-width, 2px 2px 0 0);
+      }
+
+      &:after {
+        @include appDir(right, -1px, left, -1px);
+        bottom: -1px;
+        @include appDir(border-width, 0 2px 2px 0, border-width, 0 0 2px 2px);
+      }
+
+      ul,
+      .form-styled {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 30px;
+      }
+
+      ul {
+        li {
+          @include appDir(font-weight, 600, font-weight, bold);
+
+          @include theme() {
+            color: themed("t_color_one");
+          }
+
+          &:not(:last-of-type) {
+            margin-bottom: 12px;
+          }
+
+          &:before {
+            @include appDir(content, "\f0da", content, "\f0d9");
+            font-family: FontAwesome;
+            @include appDir(margin-right, 12px, margin-left, 12px);
+          }
+        }
+      }
+
+      .form-styled {
+        @include flexbox(flex, "", center, "", "", "");
+
+        .group {
+          $group_height: 40px;
+
+          @include flexbox(flex, "", center, "", "", "");
+          height: $group_height;
+          width: 100%;
+
+          input,
+          button {
+            display: block;
+            height: $group_height;
+            line-height: $group_height;
+            padding: 0 20px;
+            border: none;
+            outline: none;
+
+            &:focus {
+              @include focusStyle("reverse");
+            }
+          }
+
+          input {
+            width: calc(100% - 2px);
+            color: $dark;
+            @include appDir(margin-right, 2px, margin-left, 2px);
+            border: 1px solid;
+
+            @include theme() {
+              border-color: themed("main_color_one");
+            }
+          }
+
+          button {
+            min-width: 100px;
+            color: $dark;
+            @include appDir(text-transform, uppercase, text-transform, null);
+
+            @include theme() {
+              background-color: themed("main_color_one");
+            }
+
+            &:hover {
+              @include theme() {
+                background-color: themed("main_color_two");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

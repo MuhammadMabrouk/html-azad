@@ -1,0 +1,17 @@
+/* 1. News Page Styles */
+/*---------------------*/
+.news-page {
+  .news-page-content {
+    .news-items {
+      margin-bottom: -50px;
+
+      .news-item {
+        margin-bottom: 50px;
+      }
+    }
+
+    .pagination {
+      margin-top: 40px;
+    }
+  }
+}

@@ -1,0 +1,237 @@
+/* 3. Input Radio & Checkbox */
+/*---------------------------*/
+.form-styled {
+  .radio-container,
+  .checkbox-container {
+    @include flexbox(flex, "", center, "", "", "");
+
+    &:not(.revers-bg):not(.img) {
+      .radio,
+      .checkbox {
+        input:checked + label {
+          @include theme() {
+            background-color: themed("main_color_two");
+            border-color: themed("main_color_two");
+          }
+
+          &:after {
+            @include theme() {
+              background-color: themed("bg_color_one");
+            }
+          }
+        }
+
+        input:not(:checked) + label {
+          @include theme() {
+            border-color: themed("border_color");
+          }
+
+          &:after {
+            @include theme() {
+              background-color: themed("bg_color_two");
+            }
+          }
+        }
+
+        input:disabled + label {
+          &:after {
+            height: 100%;
+            width: 100%;
+
+            @include theme() {
+              background-color: themed("bg_color_two");
+            }
+          }
+        }
+
+        label {
+          border: 1px solid;
+        }
+      }
+    }
+
+    &.revers-bg {
+      .radio,
+      .checkbox {
+        input:checked + label:after {
+          @include theme() {
+            background-color: themed("main_color_two");
+          }
+        }
+
+        input:disabled + label {
+          &:after {
+            height: 100%;
+            width: 100%;
+
+            @include theme() {
+              background-color: themed("bg_color_two");
+            }
+          }
+        }
+
+        label {
+          @include theme() {
+            background-color: themed("bg_color_one");
+          }
+        }
+      }
+    }
+
+    &.img {
+      $size: 70px;
+
+      position: relative;
+      height: $size;
+      width: $size;
+      border: 1px solid;
+      border-radius: 3px;
+      @include transition(0.3s);
+
+      &:not(.checked) {
+        @include theme() {
+          background-color: themed("bg_color_two");
+          border-color: themed("border_color");
+        }
+      }
+
+      &.checked {
+        @include theme() {
+          background-color: rgba(themed("main_color_one"), 0.25);
+          border-color: themed("main_color_two");
+        }
+      }
+
+      .radio,
+      .checkbox {
+        position: absolute;
+        z-index: 1;
+        top: 5px;
+        @include appDir(right, 5px, left, 5px);
+
+        input:checked + label:after {
+          @include theme() {
+            background-color: themed("main_color_two");
+          }
+        }
+
+        input:disabled + label {
+          &:after {
+            height: 100%;
+            width: 100%;
+
+            @include theme() {
+              background-color: themed("bg_color_two");
+            }
+          }
+        }
+
+        label {
+          @include theme() {
+            background-color: themed("bg_color_one");
+          }
+        }
+      }
+
+      .label-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
+        img {
+          display: block;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .radio,
+    .checkbox {
+      $btn_size: 18px;
+
+      position: relative;
+
+      input {
+        position: absolute;
+        height: 0;
+        width: 0;
+        opacity: 0;
+      }
+
+      label {
+        position: relative;
+        display: block;
+        height: $btn_size;
+        width: $btn_size;
+        margin: 0;
+        cursor: pointer;
+        @include transition(0.3s);
+
+        &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: (($btn_size / 2) - 1px);
+          width: (($btn_size / 2) - 1px);
+          @include transition(0.3s);
+        }
+      }
+
+      &.radio {
+        label {
+          border-radius: 50%;
+
+          &:after {
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+
+    > label {
+      margin: 0;
+      cursor: pointer;
+
+      &:not(.label-img) {
+        @include appDir(margin-left, 12px, margin-right, 12px);
+      }
+
+      a {
+        @include appDir(margin-left, 8px, margin-right, 8px);
+
+        @include theme() {
+          color: themed("main_color_two");
+        }
+
+        &:focus,
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &.disabled {
+      .radio,
+      .checkbox {
+        label {
+          cursor: not-allowed;
+        }
+      }
+
+      > label {
+        cursor: not-allowed;
+      }
+    }
+
+    &:focus-within {
+      @include focusStyle();
+    }
+  }
+}

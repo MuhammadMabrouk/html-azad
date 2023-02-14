@@ -1,0 +1,163 @@
+/* reviews section */
+.reviews-section {
+  .section-content {
+    .reviews-carousel {
+      padding-top: 25px;
+      margin-top: -25px;
+      overflow: hidden;
+
+      .owl-carousel {
+        .owl-stage-outer {
+          overflow: initial;
+
+          .owl-item {
+            .reviews-carousel-item {
+              position: relative;
+              text-align: center;
+              padding: {
+                left: 40px;
+                right: 40px;
+                bottom: 40px;
+              }
+              border: 1px dashed;
+
+              @include theme() {
+                border-color: themed("t_color_two");
+                box-shadow: themed("card_shadow");
+              }
+
+              &:before,
+              &:after {
+                content: "";
+                position: absolute;
+                display: block;
+                height: 20px;
+                width: 20px;
+                border-style: solid;
+                border-color: $secondary;
+              }
+
+              &:before {
+                top: -1px;
+                @include appDir(left, -1px, right, -1px);
+                @include appDir(
+                  border-width,
+                  2px 0 0 2px,
+                  border-width,
+                  2px 2px 0 0
+                );
+              }
+
+              &:after {
+                @include appDir(right, -1px, left, -1px);
+                bottom: -1px;
+                @include appDir(
+                  border-width,
+                  0 2px 2px 0,
+                  border-width,
+                  0 0 2px 2px
+                );
+              }
+
+              .client-info {
+                margin-bottom: 40px;
+
+                .client-img {
+                  position: relative;
+                  height: 64px;
+                  width: 64px;
+                  margin: {
+                    top: -25px;
+                    left: auto;
+                    right: auto;
+                    bottom: 25px;
+                  }
+
+                  &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    z-index: 1;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    height: calc(100% - 10px);
+                    background-color: $primary;
+                  }
+
+                  img {
+                    position: relative;
+                    z-index: 2;
+                    display: block;
+                    height: 64px;
+                    width: 64px;
+                  }
+                }
+
+                .details {
+                  .name {
+                    color: $secondary;
+                    font-size: 17px;
+                    margin-bottom: 5px;
+                  }
+
+                  .job-title {
+                    font-size: 15px;
+
+                    @include theme() {
+                      color: themed("t_color_one");
+                    }
+                  }
+                }
+              }
+
+              .review-content {
+                p {
+                  margin: 0;
+                }
+              }
+            }
+          }
+        }
+
+        .owl-nav {
+          all: initial;
+          @include flexbox(flex, "", center, center, "", "");
+          width: 100%;
+          margin-top: 40px;
+
+          .owl-prev,
+          .owl-next {
+            all: initial;
+
+            &:not(:last-of-type) {
+              @include appDir(margin-right, 4px, margin-left, 4px);
+            }
+
+            .fa {
+              @include flexbox(flex, "", center, center, "", "");
+              height: 40px;
+              width: 40px;
+              cursor: pointer;
+              @include transition(0.3s);
+              opacity: 0.7;
+
+              @include theme() {
+                background-color: themed("bg_color_two");
+                color: themed("t_color_one");
+              }
+
+              &:hover {
+                opacity: 1;
+
+                @include theme() {
+                  color: themed("main_color_two");
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

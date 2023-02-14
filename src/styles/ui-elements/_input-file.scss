@@ -1,0 +1,105 @@
+/* 5. Custom Input File */
+/*----------------------*/
+$height_size: 40px;
+
+.custom-input-file {
+  position: relative;
+
+  input[type="file"] {
+    position: relative;
+    z-index: 2;
+    height: $height_size;
+    width: 100%;
+    opacity: 0;
+  }
+
+  label {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: $height_size;
+    width: 100%;
+    line-height: 40px;
+    @include appDir(padding-right, 94px, padding-left, 94px);
+    @include appDir(padding-left, 14px, padding-right, 14px);
+    margin: 0;
+    border: 1px solid;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include theme() {
+      background-color: themed("inputs_bg_color");
+      border-color: themed("inputs_bg_color");
+    }
+
+    &:after {
+      content: attr(data-name);
+      position: absolute;
+      z-index: 3;
+      top: 0;
+      @include appDir(right, 0, left, 0);
+      height: $height_size;
+      width: 80px;
+      color: $dark;
+      line-height: 40px;
+      text-align: center;
+
+      @include theme() {
+        background-color: themed("main_color_one");
+      }
+    }
+  }
+
+  .upload-progress {
+    margin-top: 4px;
+
+    .bar {
+      position: relative;
+      height: 6px;
+      width: calc(100% - 35px);
+
+      @include theme() {
+        background-color: themed("bg_color_two");
+      }
+
+      span {
+        display: block;
+        position: absolute;
+        top: 0;
+        @include appDir(left, 0, right, 0);
+        height: 100%;
+
+        @include theme() {
+          background-color: themed("main_color_one");
+        }
+      }
+    }
+
+    .num {
+      font-size: 12px;
+    }
+  }
+
+  &.loading {
+    height: calc(#{$height_size} + 20px);
+    padding-bottom: 20px;
+
+    .upload-progress {
+      @include flexbox(flex, "", center, between, "", "");
+    }
+  }
+
+  &:not(.loading) {
+    height: $height_size;
+
+    .upload-progress {
+      display: none;
+    }
+  }
+
+  &:focus-within {
+    @include focusStyle();
+  }
+}

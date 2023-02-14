@@ -1,0 +1,417 @@
+/* service calculator section */
+.service-calculator {
+  position: relative;
+  margin-top: -80px;
+
+  .calculator-and-reach-in {
+    margin: {
+      left: initial;
+      right: initial;
+    }
+
+    @include theme() {
+      box-shadow: themed("card_shadow");
+    }
+
+    .calculator,
+    .reach-in {
+      padding: 30px;
+
+      .title {
+        color: $dark;
+        @include appDir(text-transform, uppercase, text-transform, null);
+      }
+
+      &.calculator {
+        @include theme() {
+          background-color: themed("main_color_one");
+        }
+
+        .title {
+          margin-bottom: 20px;
+        }
+
+        .form-styled {
+          .group-of-groups {
+            @include appDir(padding-left, 30px, padding-right, 30px);
+
+            &:first-of-type ~ .group-of-groups {
+              &:after {
+                content: "";
+                position: absolute;
+                @include appDir(
+                  left,
+                  calc(15px + 7px),
+                  right,
+                  calc(15px + 7px)
+                );
+                height: 100%;
+                width: 0;
+                border-left: 1px dashed;
+
+                @include theme() {
+                  border-color: themed("bg_color_one");
+                }
+
+                @media #{$min_992} {
+                  bottom: 35px;
+                }
+
+                @media #{$max_991} {
+                  top: -40px;
+                }
+
+                @media #{$max_576} {
+                  top: -100px;
+                }
+              }
+            }
+
+            label {
+              color: $dark;
+            }
+
+            .rhombus-shape {
+              position: absolute;
+              z-index: 1;
+              @include appDir(left, 15px, right, 15px);
+              height: 15px;
+              width: 15px;
+              padding: 0;
+              clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+              @include theme() {
+                background-color: themed("bg_color_one");
+              }
+
+              @media #{$min_992} {
+                bottom: calc(20px + 14px);
+              }
+
+              @media #{$max_991} {
+                top: calc(29px + 14px);
+              }
+            }
+          }
+
+          .dest-container {
+            @include flexbox(flex, "", "", between, "", wrap);
+
+            @media #{$max_576} {
+              margin-bottom: 20px;
+            }
+
+            .group {
+              @media #{$min_577} {
+                width: calc(50% - 12px);
+              }
+
+              @media #{$max_576} {
+                width: 100%;
+              }
+            }
+          }
+
+          &.from-origin-to-dest {
+            .dest-container {
+              display: none;
+            }
+          }
+
+          &.dest-only {
+            .group-of-groups {
+              display: none;
+            }
+          }
+
+          label {
+            color: $dark;
+          }
+
+          .group {
+            &.inline {
+              @media #{$min_768} {
+                @include flexbox(flex, "", center, "", "", wrap);
+
+                > label {
+                  margin: 0;
+                }
+              }
+
+              @media #{$max_767} {
+                .control {
+                  margin-bottom: 8px;
+                }
+              }
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 20px;
+            }
+
+            .control {
+              input {
+                border: 1px dashed;
+                @include transition(0.3s);
+
+                &::placeholder {
+                  @include theme() {
+                    color: themed("t_color_one");
+                  }
+                }
+
+                &:not(:focus) {
+                  border-color: transparent !important;
+                }
+
+                &:focus {
+                  @include theme() {
+                    border-color: themed("main_color_two");
+                  }
+
+                  @include focusStyle('dark');
+                }
+              }
+
+              .select .select-styled {
+                border: 0;
+
+                @include theme() {
+                  color: themed("t_color_one");
+                }
+
+                &:focus {
+                  @include focusStyle('dark');
+                }
+              }
+
+              .radio-container,
+              .checkbox-container {
+                @include appDir(margin-left, 25px, margin-right, 25px);
+
+                &:focus-within {
+                  @include focusStyle('dark');
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.reach-in {
+        @include theme() {
+          background-color: themed("main_color_two");
+        }
+
+        .title {
+          text-align: center;
+          margin-bottom: 35px;
+        }
+
+        .shipping-path {
+          $box_height: 24px;
+
+          position: relative;
+          @include flexbox(flex, "", "", "", "", "");
+
+          .first-half,
+          .second-half {
+            @include flexbox(flex, "", center, "", "", "");
+            position: relative;
+            height: $box_height;
+            width: 50%;
+
+            &:before,
+            &:after {
+              content: "";
+              display: block;
+              position: absolute;
+              z-index: 1;
+            }
+
+            &:before {
+              top: 0;
+              border: 1px solid;
+              @include ltr_rotate(45);
+
+              @include theme() {
+                background-color: themed("main_color_two");
+              }
+            }
+
+            &:after {
+              top: (($box_height / 4) - 1px);
+              height: (($box_height / 2) + 2px);
+              width: (($box_height / 2) + 2px);
+              clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            }
+
+            span {
+              position: relative;
+              display: block;
+              width: 100%;
+              border-top: 1px dashed;
+            }
+
+            &.first-half {
+              &:before {
+                @include appDir(left, 0, right, 0);
+                height: $box_height;
+                width: $box_height;
+                border-color: $light_code;
+              }
+
+              &:after {
+                @include appDir(
+                  left,
+                  (($box_height / 4) - 1px),
+                  right,
+                  (($box_height / 4) - 1px)
+                );
+                background-color: $light_code;
+              }
+
+              span {
+                border-top-color: $light_code;
+              }
+            }
+
+            &.second-half {
+              &:before {
+                @include appDir(right, 0, left, 0);
+                height: $box_height;
+                width: $box_height;
+                border-color: $dark;
+              }
+
+              &:after {
+                @include appDir(
+                  right,
+                  (($box_height / 4) - 1px),
+                  left,
+                  (($box_height / 4) - 1px)
+                );
+                background-color: $dark;
+              }
+
+              span {
+                border-top-color: $dark;
+              }
+            }
+          }
+
+          .shipping-method {
+            $img_size: 49px;
+
+            position: absolute;
+            z-index: 3;
+            top: 50%;
+            @include appDir(left, 50%, right, 50%);
+            @include ltr_translate(-50%, -50%);
+            height: $img_size;
+            width: $img_size;
+            @include appDir(
+              transform,
+              null,
+              transform,
+              rotateY(180deg) translate(-50%, -50%)
+            );
+
+            @include theme() {
+              background-color: themed("main_color_two");
+            }
+
+            img {
+              width: $img_size;
+              animation: lightSpeedInLeft 0.4s ease-in-out;
+
+              &.active {
+                display: block;
+              }
+
+              &:not(.active) {
+                display: none;
+              }
+            }
+          }
+        }
+
+        .days {
+          color: $dark;
+          @include appDir(text-transform, uppercase, text-transform, null);
+          text-align: center;
+          margin: 35px 0 30px;
+        }
+
+        .total {
+          @include flexbox(flex, "", stretch, "", "", "");
+          text-align: center;
+
+          strong {
+            @include flexbox(flex, "", stretch, center, "", "");
+
+            span {
+              @include flexbox(flex, "", center, center, "", "");
+              padding: {
+                top: 10px;
+                bottom: 10px;
+              }
+            }
+
+            &:nth-of-type(1) {
+              width: 40%;
+              background-color: $primary;
+              color: $dark;
+              @include appDir(padding-left, 20px, padding-right, 20px);
+              @include appDir(padding-right, 30px, padding-left, 30px);
+            }
+
+            &:nth-of-type(2) {
+              width: 60%;
+
+              span {
+                &:first-of-type {
+                  position: relative;
+                  width: 100%;
+                  background-color: $dark;
+                  color: $light_code;
+                  padding: {
+                    left: 20px;
+                    right: 20px;
+                  }
+
+                  &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    @include appDir(left, -9px, right, -9px);
+                    height: 100%;
+                    width: 10px;
+                    background-color: $dark;
+
+                    @include appDir(
+                      clip-path,
+                      polygon(50% 0, 100% 0, 100% 100%, 0% 100%),
+                      clip-path,
+                      polygon(0 0, 50% 0, 100% 100%, 0% 100%)
+                    );
+                  }
+                }
+
+                &:last-of-type {
+                  background-color: $light_code;
+                  color: $dark;
+                  padding: {
+                    left: 10px;
+                    right: 10px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

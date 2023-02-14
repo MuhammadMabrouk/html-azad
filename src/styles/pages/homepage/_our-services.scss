@@ -1,0 +1,210 @@
+/* our services section */
+.services-section {
+  .services-section-content {
+    // tabs menu
+    .tabs-menu {
+      @include flexbox(flex, "", center, "", "", "");
+      margin-bottom: 50px;
+
+      @media #{$max_767} {
+        flex-direction: column;
+      }
+
+      li {
+        @media #{$min_768} {
+          &:not(:last-of-type) {
+            @include appDir(margin-right, 25px, margin-left, 25px);
+          }
+        }
+
+        @media #{$max_767} {
+          &:not(:last-of-type) {
+            margin-bottom: 10px;
+          }
+        }
+
+        button {
+          min-width: 170px;
+          text-align: center;
+          @include appDir(text-transform, uppercase, text-transform, null);
+          @include appDir(font-weight, 600, font-weight, bold);
+          padding: 12px 22px;
+          border: 1px dashed;
+
+          @include theme() {
+            color: themed("t_color_one");
+            border-color: themed("main_color_two");
+          }
+
+          &.active,
+          &:hover {
+            @include theme() {
+              background-color: themed("main_color_two");
+              color: themed("bg_color_one");
+            }
+          }
+
+          &:focus {
+            @include focusStyle();
+          }
+        }
+      }
+    }
+
+    // tabs contents area
+    .tabs-contents-area {
+      .contents {
+        margin-bottom: -30px;
+
+        &:not(.active) {
+          display: none;
+        }
+
+        .content-col {
+          animation: fadeInUp 0.4s ease-out both;
+
+          @media #{$max_576} {
+            width: calc(100% - 12px);
+          }
+
+          .content {
+            position: relative;
+            padding: 10px;
+            margin-bottom: 30px;
+            border: 1px dashed;
+            @include transition(0.3s);
+
+            @include theme() {
+              border-color: themed("t_color_two");
+            }
+
+            &:after {
+              content: "";
+              display: block;
+              position: absolute;
+              top: calc(100% + 1px);
+              left: -1px;
+              height: 0;
+              width: calc(100% + 2px);
+              @include transition(0.3s);
+
+              @include theme() {
+                background-color: themed("main_color_two");
+              }
+            }
+
+            .title {
+              $title_height: 60px;
+
+              position: relative;
+              @include flexbox(flex, "", center, "", "", "");
+              height: $title_height;
+              padding: {
+                top: 18px;
+                bottom: 18px;
+              }
+              @include appDir(padding-left, 10px, padding-right, 10px);
+              @include appDir(
+                padding-right,
+                calc(#{$title_height} - 14px),
+                padding-left,
+                calc(#{$title_height} - 14px)
+              );
+              @include transition(0.3s);
+
+              &:before,
+              .icon {
+                position: absolute;
+                z-index: 1;
+                top: -5px;
+                @include appDir(right, -24px, left, -24px);
+                height: calc(#{$title_height} + 10px);
+                width: $title_height;
+              }
+
+              &:before {
+                content: "";
+                display: block;
+                border-width: 5px 0;
+                border-style: solid;
+                border-color: transparent;
+                @include transition(0.3s);
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+
+                @include theme() {
+                  background-color: themed("main_color_one");
+                  border-color: themed("bg_color_one");
+                }
+              }
+
+              h3 {
+                position: relative;
+                z-index: 2;
+                font-size: 20px;
+                @include appDir(
+                  text-transform,
+                  capitalize,
+                  text-transform,
+                  null
+                );
+                margin: 0;
+              }
+
+              .icon {
+                @include flexbox(flex, "", center, center, "", "");
+
+                img {
+                  display: block;
+                  width: 28px;
+                  @include transition(0.3s);
+                }
+              }
+            }
+
+            .text {
+              padding: 10px;
+            }
+
+            &:hover {
+              @include theme() {
+                box-shadow: themed("card_shadow");
+              }
+
+              &:after {
+                height: 4px;
+              }
+
+              .title {
+                @include appDir(padding-left, 18px, padding-right, 18px);
+
+                &:before {
+                  width: calc(100% + 24px);
+                  @include appDir(
+                    clip-path,
+                    polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0% 100%),
+                    clip-path,
+                    polygon(0 0, 100% 0, 100% 100%, 14px 100%)
+                  );
+
+                  @include theme() {
+                    background-color: themed("main_color_two");
+                  }
+                }
+
+                h3 {
+                  color: $light_code;
+                }
+
+                .icon {
+                  img {
+                    filter: invert(1);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

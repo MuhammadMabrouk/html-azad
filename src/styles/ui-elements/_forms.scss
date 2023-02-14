@@ -1,0 +1,214 @@
+/* 1. Forms Styles */
+/*-----------------*/
+.form-styled {
+  .group-of-groups {
+    position: relative;
+    padding: 0;
+    margin: 0;
+
+    .group {
+      &:last-child {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .group {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    &.inline {
+      > label {
+        font-size: initial;
+      }
+
+      @media #{$min_768} {
+        @include flexbox(flex, "", center, "", "", wrap);
+
+        > label {
+          margin: 0;
+        }
+      }
+
+      @media #{$max_767} {
+        .control {
+          margin-bottom: 8px;
+        }
+      }
+    }
+
+    label {
+      font-size: 12px;
+
+      @include theme() {
+        color: themed("t_color_one");
+      }
+
+      &.required-field {
+        &:after {
+          content: "*";
+          color: $danger_color;
+          font-family: monospace;
+          font-size: 16px;
+          line-height: 1;
+          @include appDir(margin-left, 4px, margin-right, 4px);
+        }
+      }
+
+      .optional {
+        font-style: italic;
+        font-weight: normal;
+        @include appDir(font-family, $en_font_two, font-family, $ar_font_two);
+
+        @include theme() {
+          color: themed("t_color_two");
+        }
+      }
+    }
+
+    .control {
+      position: relative;
+
+      &.has-prefix-icon {
+        input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
+        textarea {
+          @include appDir(padding-left, 40px, padding-right, 40px);
+        }
+      }
+
+      input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
+      textarea {
+        display: block;
+        width: 100%;
+        height: 40px;
+        padding: {
+          left: 14px;
+          right: 14px;
+        }
+        border: 1px solid;
+        outline: 0;
+        @include transition(0.3s);
+
+        @include theme() {
+          background-color: themed("inputs_bg_color");
+        }
+
+        &:not(:focus) {
+          @include theme() {
+            border-color: themed("inputs_bg_color");
+          }
+        }
+
+        &:focus {
+          @include theme() {
+            color: themed("main_color_two");
+            border-color: themed("main_color_two");
+          }
+
+          ~ .fa {
+            @include theme() {
+              color: themed("main_color_two");
+            }
+          }
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+
+          @include theme() {
+            background-color: themed("bg_color_two");
+          }
+
+          ~ .fa {
+            cursor: not-allowed;
+          }
+        }
+
+        &.invalid {
+          color: $danger_color !important;
+          border-color: $danger_color !important;
+
+          ~ .fa {
+            color: $danger_color !important;
+          }
+        }
+
+        &.valid {
+          color: $success_color !important;
+          border-color: $success_color !important;
+
+          ~ .fa {
+            color: $success_color !important;
+          }
+        }
+
+        &:focus {
+          @include focusStyle();
+        }
+      }
+
+      input:not([type="radio"]):not([type="checkbox"]):not([type="file"]) {
+        line-height: 1;
+      }
+
+      textarea {
+        min-height: 120px;
+        white-space: normal;
+        padding: {
+          top: 14px;
+          bottom: 14px;
+        }
+        resize: vertical;
+      }
+
+      > .fa {
+        position: absolute;
+        top: 50%;
+        @include translateY(-50%);
+        font-size: 18px;
+
+        &.action-icon {
+          @include appDir(right, 18px, left, 18px);
+          cursor: pointer;
+        }
+
+        &.prefix-icon {
+          @include flexbox(flex, "", center, center, "", "");
+          @include appDir(left, 0, right, 0);
+          height: 100%;
+          width: 40px;
+          @include transition(0.3s);
+        }
+      }
+
+      .errors-msgs {
+        display: none;
+      }
+    }
+
+    .char-count {
+      text-align: end;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+}
+
+.jquery-datepicker {
+  z-index: 1000;
+
+  .datepicker-box {
+    .box-row {
+      .box-cell {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.irs .irs-line {
+  &:focus-within {
+    @include focusStyle();
+  }
+}

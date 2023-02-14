@@ -1,0 +1,228 @@
+/* 3. Contact Us Styles */
+/*----------------------*/
+.contact-page {
+  // contact methods section
+  .contact-methods {
+    .contact-methods-content {
+      $transitionDur: 0.3s;
+      $imgSize: 80px;
+      $marginBottom: 30px;
+
+      margin-bottom: -$marginBottom;
+
+      .method {
+        margin-bottom: $marginBottom;
+
+        .method-img {
+          position: relative;
+          display: flex;
+          height: $imgSize;
+          width: $imgSize;
+          margin: {
+            left: auto;
+            right: auto;
+            bottom: -($imgSize / 2);
+          }
+          clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+          @include transition($transitionDur);
+
+          @include theme() {
+            background-color: themed("main_color_one");
+          }
+
+          img {
+            display: block;
+            width: 32px;
+            margin: auto;
+            @include transition($transitionDur);
+          }
+
+          span {
+            display: block;
+            position: absolute;
+            height: 10px;
+            width: 10px;
+            border-style: solid;
+            opacity: 0;
+            @include transition($transitionDur);
+
+            @include theme() {
+              border-color: themed("bg_color_one");
+            }
+
+            &:nth-of-type(1) {
+              top: 15px;
+              @include appDir(left, 50%, right, 50%);
+              @include ltr_translateX_and_rotate(-50%, 45);
+              @include appDir(
+                border-width,
+                1px 0 0 1px,
+                border-width,
+                1px 1px 0 0
+              );
+            }
+
+            &:nth-of-type(2) {
+              top: 50%;
+              @include appDir(right, 15px, left, 15px);
+              @include ltr_translateY_and_rotate(-50%, 45);
+              @include appDir(
+                border-width,
+                1px 1px 0 0,
+                border-width,
+                1px 0 0 1px
+              );
+            }
+
+            &:nth-of-type(3) {
+              bottom: 15px;
+              @include appDir(left, 50%, right, 50%);
+              @include ltr_translateX_and_rotate(-50%, 45);
+              @include appDir(
+                border-width,
+                0 1px 1px 0,
+                border-width,
+                0 0 1px 1px
+              );
+            }
+
+            &:nth-of-type(4) {
+              top: 50%;
+              @include appDir(left, 15px, right, 15px);
+              @include ltr_translateY_and_rotate(-50%, 45);
+              @include appDir(
+                border-width,
+                0 0 1px 1px,
+                border-width,
+                0 1px 1px 0
+              );
+            }
+          }
+        }
+
+        .method-info {
+          height: calc(100% - (#{$imgSize} / 2));
+          text-align: center;
+          padding: 60px 30px 20px;
+          border: 1px dashed;
+          @include transition($transitionDur);
+
+          @include theme() {
+            border-color: themed("border_color");
+          }
+
+          .title {
+            @include appDir(text-transform, capitalize, text-transform, null);
+            font-size: 22px;
+            margin: 0 0 20px;
+            @include transition($transitionDur);
+          }
+
+          .method-items {
+            li {
+              &:not(:last-child) {
+                margin-bottom: 8px;
+              }
+
+              a {
+                &:hover {
+                  text-decoration: underline;
+
+                  @include theme() {
+                    color: themed("t_color_one");
+                  }
+                }
+
+                &:focus {
+                  @include focusStyle();
+                }
+              }
+            }
+          }
+        }
+
+        &:hover {
+          .method-img {
+            @include theme() {
+              background-color: themed("main_color_two");
+            }
+
+            img {
+              @include theme() {
+                filter: invert(1);
+              }
+            }
+
+            span {
+              opacity: 1;
+
+              &:nth-of-type(1) {
+                top: 5px;
+              }
+
+              &:nth-of-type(2) {
+                @include appDir(right, 5px, left, 5px);
+              }
+
+              &:nth-of-type(3) {
+                bottom: 5px;
+              }
+
+              &:nth-of-type(4) {
+                @include appDir(left, 5px, right, 5px);
+              }
+            }
+          }
+
+          .method-info {
+            @include theme() {
+              border-color: themed("main_color_two");
+              box-shadow: themed("card_shadow");
+            }
+
+            .title {
+              @include theme() {
+                color: themed("main_color_two");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // contact form section
+  .contact-form {
+    .contact-form-content {
+      form {
+        @media #{$min_768} {
+          max-width: 600px;
+          margin: auto;
+        }
+
+        .group {
+          .control {
+            .submit-btn {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // address map section
+  .address-map {
+    .map {
+      width: 100%;
+
+      @media #{$min_768} {
+        height: 450px;
+      }
+
+      @media #{$max_767} {
+        height: 300px;
+      }
+    }
+  }
+}

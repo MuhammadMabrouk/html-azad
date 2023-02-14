@@ -1,0 +1,95 @@
+/* clients section */
+.clients-section {
+  .section-content {
+    .clients-carousel {
+      .owl-stage-outer {
+        position: relative;
+
+        &:before,
+        &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          z-index: 3;
+          top: 0;
+          bottom: 0;
+          width: 25px;
+
+          @include theme() {
+            background-color: themed("bg_color_one");
+          }
+        }
+
+        &:before {
+          @include appDir(left, -10px, right, -10px);
+        }
+
+        &:after {
+          @include appDir(right, -10px, left, -10px);
+        }
+
+        .owl-item {
+          .clients-carousel-item {
+            position: relative;
+            @include flexbox(flex, "", center, center, "", "");
+            height: 200px;
+            @include appDir(border-right, 1px dashed, border-left, 1px dashed);
+
+            @include theme() {
+              border-color: themed("t_color_two");
+            }
+
+            &:before,
+            &:after {
+              content: "";
+              display: block;
+              position: absolute;
+              top: 50%;
+            }
+
+            &:before {
+              z-index: 1;
+              @include appDir(right, -10px, left, -10px);
+              height: 19px;
+              width: 19px;
+              @include ltr_rotate_and_translateY(45, -50%);
+              transform-origin: top;
+
+              @include theme() {
+                background-color: themed("bg_color_one");
+                border: 1px solid themed("t_color_two");
+              }
+            }
+
+            &:after {
+              z-index: 2;
+              @include translateY(-50%);
+              @include appDir(right, -5px, left, -5px);
+              height: 9px;
+              width: 9px;
+              clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+              @include theme() {
+                background-color: themed("t_color_two");
+              }
+            }
+
+            a {
+              display: block;
+
+              img {
+                display: block;
+                max-width: 80%;
+                margin: auto;
+              }
+
+              &:focus {
+                @include focusStyle();
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

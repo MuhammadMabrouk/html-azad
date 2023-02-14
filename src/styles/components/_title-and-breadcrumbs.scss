@@ -1,0 +1,237 @@
+/* 4. Title & Breadcrumbs Styles */
+/*-------------------------------*/
+.title-and-breadcrumbs {
+  background: url("../assets/images/main-slider/truck-bg.jpg") fixed center
+    no-repeat;
+  background-size: cover;
+  padding-bottom: 50px;
+  @include appDir(padding-left, 30px, padding-right, 30px);
+  overflow: hidden;
+
+  &:not(.balanced-height) {
+    @media #{$min_992} {
+      padding-top: 220px;
+    }
+
+    @media #{$max_991} {
+      padding-top: 120px;
+    }
+  }
+
+  &.balanced-height {
+    padding-top: 80px;
+  }
+
+  &.hide-content {
+    @media #{$max_991} {
+      padding: {
+        top: 200px;
+        bottom: 0;
+      }
+    }
+  }
+
+  .box-content {
+    $border_box_width: 60px;
+    $padding_top_size: 20px;
+    $padding_bottom_size: 50px;
+    $rhombus_size: 10px;
+
+    position: relative;
+    padding: {
+      top: $padding_top_size;
+      bottom: $padding_bottom_size;
+    }
+    @include appDir(
+      padding-left,
+      ($border_box_width / 2),
+      padding-right,
+      ($border_box_width / 2)
+    );
+
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: 1;
+    }
+
+    &:before {
+      top: 0;
+      @include appDir(left, 0, right, 0);
+      width: $border_box_width;
+      border: 1px dashed $primary;
+      @include appDir(border-right-width, 0, border-left-width, 0);
+      border-bottom-width: 0;
+    }
+
+    &:after {
+      top: ($padding_top_size - $rhombus_size);
+      @include appDir(
+        left,
+        ($border_box_width - (($rhombus_size / 2) + 0.5px)),
+        right,
+        ($border_box_width - (($rhombus_size / 2) + 0.5px))
+      );
+      height: $rhombus_size;
+      width: $rhombus_size;
+      background-color: $primary;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    .rhombus-shape {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      @include translateY(-50%);
+      @include appDir(left, -11px, right, -11px);
+      height: 22px;
+      width: 22px;
+      background: url("../assets/images/main-slider/truck-bg.jpg") fixed 0 0
+        no-repeat;
+      background-size: cover;
+      border: 1px solid;
+      @include ltr_rotate(45);
+
+      @include theme() {
+        border-color: themed("main_color_one");
+      }
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        @include appDir(left, 50%, right, 50%);
+        @include ltr_translate_and_rotate(-50%, -50%, 45);
+        display: block;
+        height: 10px;
+        width: 10px;
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+        @include theme() {
+          background-color: themed("main_color_one");
+        }
+      }
+    }
+
+    .box-text {
+      position: relative;
+      z-index: 2;
+
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -$padding_top_size;
+        height: ($padding_top_size - ($rhombus_size / 2));
+        @include appDir(
+          left,
+          (($border_box_width / 2) - 1px),
+          right,
+          (($border_box_width / 2) - 1px)
+        );
+        @include appDir(
+          border-right,
+          1px dashed $secondary,
+          border-left,
+          1px dashed $secondary
+        );
+      }
+
+      .title {
+        color: #fff;
+        font-size: 26px;
+        margin: 0;
+      }
+
+      .details-link,
+      .dynamic-content {
+        margin-top: 12px;
+
+        a {
+          @include theme() {
+            color: themed("main_color_one");
+          }
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &:focus {
+            @include focusStyle();
+          }
+        }
+      }
+
+      .dynamic-content {
+        color: #fff;
+        margin-top: 12px;
+      }
+
+      .breadcrumbs {
+        @include flexbox(flex, "", center, "", "", "");
+        margin-top: 25px;
+
+        li {
+          display: inline-block;
+          color: darken(#fff, 15);
+          flex-shrink: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          @include transition(0.3s);
+
+          &:first-child,
+          &:hover {
+            flex-shrink: 0;
+          }
+
+          a {
+            color: #fff;
+
+            &:focus,
+            &:hover {
+              text-decoration: underline;
+
+              @include theme() {
+                color: themed("main_color_one");
+              }
+            }
+          }
+
+          &:not(:last-of-type) {
+            position: relative;
+            @include appDir(padding-right, 25px, padding-left, 25px);
+
+            &:after {
+              content: "/";
+              color: #fff;
+              position: absolute;
+              top: 50%;
+              @include translateY(-50%);
+              @include appDir(right, 10px, left, 10px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.half-height) {
+    .box-content {
+      &:before {
+        height: calc(100% + 30px);
+      }
+    }
+  }
+
+  &.half-height {
+    .box-content {
+      &:before {
+        height: calc(50% + 15px);
+      }
+    }
+  }
+}

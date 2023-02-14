@@ -1,0 +1,62 @@
+/* 2. Custom Input Number */
+/*------------------------*/
+.form-styled {
+  .custom-number {
+    position: relative;
+    height: 40px;
+
+    @include theme() {
+      background-color: themed("bg_color_one");
+    }
+
+    .number {
+      position: absolute;
+      top: 0;
+      @include appDir(left, 0, right, 0);
+      height: 100%;
+      width: calc(100% - 30px);
+      text-align: center;
+
+      &::placeholder {
+        text-align: start;
+      }
+
+      &:disabled {
+        & ~ .fa {
+          cursor: not-allowed;
+        }
+      }
+
+      &:not(:disabled) {
+        & ~ .fa:hover {
+          @include theme() {
+            color: themed("t_color_one");
+          }
+        }
+      }
+    }
+
+    .fa {
+      position: absolute;
+      @include appDir(right, 0, left, 0);
+      @include flexbox(flex, "", center, center, "", "");
+      height: 20px;
+      width: 30px;
+      text-align: center;
+      cursor: pointer;
+      @include transition(0.3s);
+
+      @include theme() {
+        color: themed("t_color_two");
+      }
+
+      &.fa-angle-up {
+        top: 0;
+      }
+
+      &.fa-angle-down {
+        bottom: 0;
+      }
+    }
+  }
+}

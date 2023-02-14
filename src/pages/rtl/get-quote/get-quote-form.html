@@ -1,0 +1,422 @@
+<!--
+  - add class 'incomplete-request' to show the form and hide the request preview.
+  - add class 'completed-request' to show the request preview and hide the form.
+  * just add one of them.
+-->
+<div class="request-body incomplete-request box-with-border" style="display: none;">
+
+  <!-- steps progress -->
+  <div class="step-progress basic interactive">
+    <ul class="steps">
+      <li class="step active" data-num="1" onclick="goToStep(event, 1)">
+        <strong>المتطلبات</strong>
+      </li>
+      <li class="step" data-num="2" onclick="goToStep(event, 2)">
+        <strong>معلومات الطريق</strong>
+      </li>
+      <li class="step" data-num="3" onclick="goToStep(event, 3)">
+        <strong>معلومات الحمولة</strong>
+      </li>
+    </ul>
+
+    <div class="bar"></div>
+    <div class="fill"></div>
+  </div>
+
+  <!-- request preview -->
+  <div class="request-preview animate__animated animate__fadeInUp">
+    <h5 class="desc">
+      هذا مثال لوصف شحنتي
+    </h5>
+    <div class="buttons-container">
+      <button class="btn btn-primary" onclick="showRequestDetails(event)">
+        عرض التفاصيل
+      </button>
+    </div>
+  </div>
+
+  <!-- shipments form -->
+  <form id="shipmentsForm_autoUniqueId" class="shipments-form form-styled" data-current-step="1" data-steps-length="3">
+
+    <!-- requirements -->
+    <div class="requirements step" tabindex="-1">
+      <div class="group">
+        <label for="desc_autoUniqueId">الوصف</label>
+        <div class="control">
+          <textarea id="desc_autoUniqueId" name="desc" placeholder="أضف وصفًا لحمولتك التي تريد شحنها"></textarea>
+        </div>
+      </div>
+      <div class="group">
+        <label class="required-field">استيراد / تصدير:</label>
+        <div class="control mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="import_autoUniqueId" type="radio" name="importOrExport" value="import" aria-labelledby="import_label_autoUniqueId" required checked>
+              <label for="import_autoUniqueId"></label>
+            </div>
+            <label id="import_label_autoUniqueId" for="import_autoUniqueId">استيراد</label>
+          </div>
+        </div>
+        <div class="control mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="export_autoUniqueId" type="radio" name="importOrExport" value="export" aria-labelledby="export_label_autoUniqueId">
+              <label for="export_autoUniqueId"></label>
+            </div>
+            <label id="export_label_autoUniqueId" for="export_autoUniqueId">تصدير</label>
+          </div>
+        </div>
+      </div>
+      <div class="group row">
+        <label class="required-field col-md-12">وسيلة النقل:</label>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="oceanFreight_autoUniqueId" type="radio" name="transportMode" value="oceanFreight" aria-labelledby="oceanFreight_label_autoUniqueId" required checked>
+              <label for="oceanFreight_autoUniqueId"></label>
+            </div>
+            <label id="oceanFreight_label_autoUniqueId" for="oceanFreight_autoUniqueId">الشحن البحري</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="roadFreight_autoUniqueId" type="radio" name="transportMode" value="roadFreight" aria-labelledby="roadFreight_label_autoUniqueId">
+              <label for="roadFreight_autoUniqueId"></label>
+            </div>
+            <label id="roadFreight_label_autoUniqueId" for="roadFreight_autoUniqueId">الشحن البري</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="airFreight_autoUniqueId" type="radio" name="transportMode" value="airFreight" aria-labelledby="airFreight_label_autoUniqueId">
+              <label for="airFreight_autoUniqueId"></label>
+            </div>
+            <label id="airFreight_label_autoUniqueId" for="airFreight_autoUniqueId">الشحن الجوي</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="railFreight_autoUniqueId" type="radio" name="transportMode" value="railFreight" aria-labelledby="railFreight_label_autoUniqueId">
+              <label for="railFreight_autoUniqueId"></label>
+            </div>
+            <label id="railFreight_label_autoUniqueId" for="railFreight_autoUniqueId">الشحن بالسكك الحديدية</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="multimodal_autoUniqueId" type="radio" name="transportMode" value="multimodal" aria-labelledby="multimodal_label_autoUniqueId">
+              <label for="multimodal_autoUniqueId"></label>
+            </div>
+            <label id="multimodal_label_autoUniqueId" for="multimodal_autoUniqueId">متعدد الوسائط</label>
+          </div>
+        </div>
+      </div>
+      <div class="group containerSize row">
+        <label class="required-field col-md-12">حجم الحاوية:</label>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="20_autoUniqueId" type="radio" name="containerSize" value="20'" aria-labelledby="20_label_autoUniqueId" required checked>
+              <label for="20_autoUniqueId"></label>
+            </div>
+            <label id="20_label_autoUniqueId" for="20_autoUniqueId">20'</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="40_autoUniqueId" type="radio" name="containerSize" value="40'" aria-labelledby="40_label_autoUniqueId">
+              <label for="40_autoUniqueId"></label>
+            </div>
+            <label id="40_label_autoUniqueId" for="40_autoUniqueId">40'</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="40_HQ_autoUniqueId" type="radio" name="containerSize" value="40' HQ" aria-labelledby="40_HQ_label_autoUniqueId">
+              <label for="40_HQ_autoUniqueId"></label>
+            </div>
+            <label id="40_HQ_label_autoUniqueId" for="40_HQ_autoUniqueId">40' HQ</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="45_HQ_autoUniqueId" type="radio" name="containerSize" value="45' HQ" aria-labelledby="45_HQ_label_autoUniqueId">
+              <label for="45_HQ_autoUniqueId"></label>
+            </div>
+            <label id="45_HQ_label_autoUniqueId" for="45_HQ_autoUniqueId">45' HQ</label>
+          </div>
+        </div>
+      </div>
+      <div class="group containerType row">
+        <label class="required-field col-md-12">نوع الحاوية:</label>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="dry_autoUniqueId" type="radio" name="containerType" value="dry" aria-labelledby="dry_label_autoUniqueId" required checked>
+              <label for="dry_autoUniqueId"></label>
+            </div>
+            <label id="dry_label_autoUniqueId" for="dry_autoUniqueId">جافة</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="openTop_autoUniqueId" type="radio" name="containerType" value="openTop" aria-labelledby="openTop_label_autoUniqueId">
+              <label for="openTop_autoUniqueId"></label>
+            </div>
+            <label id="openTop_label_autoUniqueId" for="openTop_autoUniqueId">سقف مفتوح</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="flatRack_autoUniqueId" type="radio" name="containerType" value="flatRack" aria-labelledby="flatRack_label_autoUniqueId">
+              <label for="flatRack_autoUniqueId"></label>
+            </div>
+            <label id="flatRack_label_autoUniqueId" for="flatRack_autoUniqueId">جوانب مفتوحة</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="platform_autoUniqueId" type="radio" name="containerType" value="platform" aria-labelledby="platform_label_autoUniqueId">
+              <label for="platform_autoUniqueId"></label>
+            </div>
+            <label id="platform_label_autoUniqueId" for="platform_autoUniqueId">منصة</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="tank_autoUniqueId" type="radio" name="containerType" value="tank" aria-labelledby="tank_label_autoUniqueId">
+              <label for="tank_autoUniqueId"></label>
+            </div>
+            <label id="tank_label_autoUniqueId" for="tank_autoUniqueId">خزان</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="reefer_autoUniqueId" type="radio" name="containerType" value="reefer" aria-labelledby="reefer_label_autoUniqueId">
+              <label for="reefer_autoUniqueId"></label>
+            </div>
+            <label id="reefer_label_autoUniqueId" for="reefer_autoUniqueId">مبردة</label>
+          </div>
+        </div>
+      </div>
+      <div class="group row">
+        <label class="col-md-12">خدمات إضافية:</label>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="checkbox-container">
+            <div class="checkbox">
+              <input id="customsClearance_autoUniqueId" type="checkbox" name="customsClearance" aria-labelledby="customsClearance_label_autoUniqueId">
+              <label for="customsClearance_autoUniqueId"></label>
+            </div>
+            <label id="customsClearance_label_autoUniqueId" for="customsClearance_autoUniqueId">التخليص الجمركي</label>
+          </div>
+        </div>
+        <div class="control col-md-6 col-lg-4 col-xl-3 mb-3">
+          <div class="checkbox-container">
+            <div class="checkbox">
+              <input id="warehousing_autoUniqueId" type="checkbox" name="warehousing" aria-labelledby="warehousing_label_autoUniqueId">
+              <label for="warehousing_autoUniqueId"></label>
+            </div>
+            <label id="warehousing_label_autoUniqueId" for="warehousing_autoUniqueId">التخزين</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- route info -->
+    <div class="route-info step" tabindex="-1">
+      <div class="group">
+        <label>مكان الاستلام</label>
+        <div class="control">
+          <select name="collectionPlace" form="shipmentsForm_autoUniqueId">
+            <option value="">اختر...</option>
+            <option value="city-one">المدينة الأولى</option>
+            <option value="city-two">المدينة الثانية</option>
+            <option value="city-three">المدينة الثالثة</option>
+            <option value="city-four">المدينة الرابعة</option>
+          </select>
+        </div>
+      </div>
+      <div class="group">
+        <label class="required-field">ميناء التحميل</label>
+        <div class="control">
+          <select name="loadingPort" form="shipmentsForm_autoUniqueId" required>
+            <option value="">اختر...</option>
+            <option value="city-one">المدينة الأولى</option>
+            <option value="city-two">المدينة الثانية</option>
+            <option value="city-three">المدينة الثالثة</option>
+            <option value="city-four">المدينة الرابعة</option>
+          </select>
+        </div>
+      </div>
+      <div class="group">
+        <label class="required-field">ميناء التفريغ</label>
+        <div class="control">
+          <select name="dischargePort" form="shipmentsForm_autoUniqueId" required>
+            <option value="">اختر...</option>
+            <option value="city-one">المدينة الأولى</option>
+            <option value="city-two">المدينة الثانية</option>
+            <option value="city-three">المدينة الثالثة</option>
+            <option value="city-four">المدينة الرابعة</option>
+          </select>
+        </div>
+      </div>
+      <div class="group">
+        <label>مكان التوصيل</label>
+        <div class="control">
+          <select name="deliveryPlace" form="shipmentsForm_autoUniqueId">
+            <option value="">اختر...</option>
+            <option value="city-one">المدينة الأولى</option>
+            <option value="city-two">المدينة الثانية</option>
+            <option value="city-three">المدينة الثالثة</option>
+            <option value="city-four">المدينة الرابعة</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- cargo info -->
+    <div class="cargo-info step" tabindex="-1">
+      <div class="group">
+        <label>نوع الحمولة</label>
+        <div class="control">
+          <select name="commodityType" form="shipmentsForm_autoUniqueId">
+            <option value="">اختر...</option>
+            <option value="meat">اللحوم</option>
+            <option value="vegetables">خضروات</option>
+            <option value="foodstuffs">مواد غذائية</option>
+            <option value="plastic-rubber">بلاستيك / مطاط</option>
+            <option value="metals">المعادن</option>
+            <option value="fruits">الفاكهة</option>
+          </select>
+        </div>
+      </div>
+      <div class="group">
+        <label class="required-field">الوزن</label>
+        <div class="control">
+          <div class="custom-number">
+            <input class="number" type="text" name="weight" placeholder="0 كغ" min="1" required>
+            <i class="fa fa-angle-up" aria-hidden="true"></i>
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      <div class="group d-md-flex">
+        <label>وحدة:</label>
+        <div class="control mb-3 me-md-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="kg_autoUniqueId" type="radio" name="unit" value="kg" aria-labelledby="kg_label_autoUniqueId" checked>
+              <label for="kg_autoUniqueId"></label>
+            </div>
+            <label id="kg_label_autoUniqueId" for="kg_autoUniqueId">كغ</label>
+          </div>
+        </div>
+        <div class="control mb-3 me-md-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="lbs_autoUniqueId" type="radio" name="unit" value="lbs" aria-labelledby="lbs_label_autoUniqueId">
+              <label for="lbs_autoUniqueId"></label>
+            </div>
+            <label id="lbs_label_autoUniqueId" for="lbs_autoUniqueId">رطل</label>
+          </div>
+        </div>
+      </div>
+      <div class="group d-md-flex">
+        <label>هل هذه الحمولة خطرة?</label>
+        <div class="control mb-3 me-md-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="no_autoUniqueId" type="radio" name="isHazardous" value="false" aria-labelledby="no_label_autoUniqueId" checked>
+              <label for="no_autoUniqueId"></label>
+            </div>
+            <label id="no_label_autoUniqueId" for="no_autoUniqueId">لا</label>
+          </div>
+        </div>
+        <div class="control mb-3 me-md-3">
+          <div class="radio-container">
+            <div class="radio">
+              <input id="yes_autoUniqueId" type="radio" name="isHazardous" value="true" aria-labelledby="yes_label_autoUniqueId">
+              <label for="yes_autoUniqueId"></label>
+            </div>
+            <label id="yes_label_autoUniqueId" for="yes_autoUniqueId">نعم</label>
+          </div>
+        </div>
+      </div>
+      <div class="margin-in-mobile cargoClassPacking row" style="display: none;">
+        <label class="col-md-12">الرجاء إدخال الفئة ومجموعة التعبئة إذا كانت معروفة</label>
+        <div class="group col-md-6">
+          <div class="control">
+            <input type="text" name="cargoClass" placeholder="الفئة">
+          </div>
+        </div>
+        <div class="group col-md-6">
+          <div class="control">
+            <input type="text" name="cargoPacking" placeholder="التعبئة">
+          </div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="row">
+          <div class="margin-in-mobile col-md-6">
+            <label class="required-field">حجم الشحنة</label>
+            <div class="control">
+              <select name="shipmentVolume" form="shipmentsForm_autoUniqueId" required>
+                <option value="">اختر...</option>
+                <option value="per-annum">كل عام</option>
+                <option value="per-month">كل شهر</option>
+                <option value="per-week">كل اسبوع</option>
+                <option value="one-off">مرة واحدة</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>الكمية</label>
+            <div class="control">
+              <div class="custom-number">
+                <input class="number" type="text" name="qty" placeholder="0" min="1">
+                <i class="fa fa-angle-up" aria-hidden="true"></i>
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons-container">
+      <div>
+        <button class="del-btn btn" type="button" title="حذف" onclick="clearOrDelete(event)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+        <button class="add-another-btn btn btn-primary animate__animated animate__fadeIn" type="button"
+          onclick="collectShipmentsFormData(event, true)">
+          أضف آخر
+        </button>
+      </div>
+
+      <div>
+        <button class="prev-btn btn" type="button" onclick="goToPrevStep(event)">السابق</button>
+        <button class="next-btn btn btn-primary" type="button" onclick="goToNextStep(event)">التالى</button>
+        <button class="continue-btn btn btn-primary" type="button"
+          onclick="collectShipmentsFormData(event)">
+          متابعة
+        </button>
+      </div>
+    </div>
+
+    <!-- form invalid message -->
+    <input class="form-invalid-msg" type="hidden" value="يرجى ملء جميع الحقول التي تحمل علامة النجمة (*)">
+  </form>
+</div>

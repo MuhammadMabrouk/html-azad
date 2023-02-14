@@ -1,0 +1,207 @@
+/* 4. Custom Input Select */
+/*------------------------*/
+.select-hidden {
+  display: none;
+
+  &:disabled + .select-styled {
+    cursor: not-allowed;
+
+    @include theme() {
+      background-color: themed("bg_color_two");
+    }
+  }
+
+  &.invalid + .select-styled {
+    color: $danger_color !important;
+    border-color: $danger_color !important;
+
+    &:after {
+      color: $danger_color !important;
+    }
+  }
+
+  &.valid + .select-styled {
+    color: $success_color !important;
+    border-color: $success_color !important;
+
+    &:after {
+      color: $success_color !important;
+    }
+  }
+}
+
+.select-styled {
+  position: relative;
+  @include flexbox(flex, "", center, "", "", "");
+  height: 40px;
+  line-height: 40px;
+  @include appDir(padding-right, 40px, padding-left, 40px);
+  @include appDir(padding-left, 14px, padding-right, 14px);
+  border: 1px solid;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include theme() {
+    background-color: themed("inputs_bg_color");
+  }
+
+  .icon {
+    width: 24px;
+    max-height: 16px;
+    object-fit: contain;
+    @include appDir(margin-right, 16px, margin-left, 16px);
+    @include appDir(
+      filter,
+      drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.54)),
+      filter,
+      drop-shadow(-1px 1px 1px rgba(0, 0, 0, 0.54))
+    );
+  }
+
+  input[type="search"] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    @include appDir(left, 0, right, 0);
+    padding: inherit !important;
+  }
+
+  &:after {
+    @include appDir(content, "\f105", content, "\f104");
+    font-family: "FontAwesome";
+    display: block;
+    position: absolute;
+    top: 0;
+    @include appDir(right, 0, left, 0);
+    height: 100%;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    @include transition(0.3s);
+  }
+
+  &:not(.active) {
+    @include theme() {
+      border-color: themed("inputs_bg_color");
+    }
+
+    input[type="search"] {
+      display: none !important;
+    }
+  }
+
+  &.active {
+    @include theme() {
+      border-color: themed("main_color_two");
+    }
+
+    > * {
+      display: none;
+    }
+
+    &:after {
+      @include ltr_rotate(90);
+
+      @include theme() {
+        color: themed("main_color_two");
+      }
+    }
+  }
+
+  &:focus-within {
+    @include focusStyle();
+  }
+}
+
+.select-options {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  top: calc(100% + 2px);
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  border: 1px solid;
+  overflow-y: auto;
+  animation: menuFadeInUp 0.3s both;
+
+  @include theme() {
+    background-color: themed("bg_color_one");
+    border-color: themed("border_color");
+  }
+
+  &::-webkit-scrollbar {
+    display: block;
+    width: 4px;
+
+    @include theme() {
+      background-color: themed("bg_color_two");
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @include theme() {
+      background-color: themed("main_color_one");
+    }
+  }
+
+  li {
+    padding: 6px 14px;
+    @include A_transition(all, 0.15s, ease-in);
+
+    .icon {
+      width: 24px;
+      max-height: 16px;
+      object-fit: contain;
+      @include appDir(margin-right, 16px, margin-left, 16px);
+      @include appDir(
+        filter,
+        drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.54)),
+        filter,
+        drop-shadow(-1px 1px 1px rgba(0, 0, 0, 0.54))
+      );
+    }
+
+    &.selected {
+      @include theme() {
+        color: themed("main_color_two");
+      }
+    }
+
+    &:not(.no-results-msg) {
+      cursor: pointer;
+
+      &:hover {
+        @include theme() {
+          background-color: rgba(themed("main_color_two"), 0.2);
+        }
+      }
+
+      &:focus {
+        margin: 3px;
+
+        @include focusStyle();
+      }
+    }
+
+    &.hidden,
+    &.no-results-msg {
+      display: none;
+    }
+  }
+}
+
+@keyframes menuFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,62 @@
+/* 6. Pagination */
+/*---------------*/
+.pagination {
+  @include flexbox(flex, "", center, "", "", "");
+
+  li {
+    &:not(:last-of-type) {
+      @include appDir(margin-right, 16px, margin-left, 16px);
+    }
+
+    a {
+      position: relative;
+      display: block;
+      min-width: 30px;
+      text-align: center;
+      @include appDir(font-weight, 600, font-weight, bold);
+      padding-bottom: 5px;
+
+      @include theme() {
+        color: themed("t_color_one");
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        @include appDir(left, 0, right, 0);
+        bottom: 0;
+        height: 1px;
+        width: 0;
+        @include transition(0.3s);
+
+        @include theme() {
+          background-color: themed("t_color_one");
+        }
+      }
+
+      &.active {
+        @include theme() {
+          color: themed("main_color_two");
+        }
+
+        &:after {
+          width: 100%;
+
+          @include theme() {
+            background-color: themed("main_color_two");
+          }
+        }
+      }
+
+      &:hover {
+        &:after {
+          width: 100%;
+        }
+      }
+
+      &:focus {
+        @include focusStyle();
+      }
+    }
+  }
+}

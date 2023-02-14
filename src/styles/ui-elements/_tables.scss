@@ -1,0 +1,122 @@
+/* 7. tables */
+/*-----------*/
+table.table-styled {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    text-align: start;
+    padding: 14px 20px;
+  }
+
+  th {
+    @include appDir(font-weight, 600, font-weight, bold);
+
+    @include theme() {
+      color: themed("t_color_one");
+    }
+  }
+
+  &.text-center {
+    th,
+    td {
+      text-align: center;
+    }
+  }
+
+  @media #{$min_768} {
+    &.shadow {
+      @include theme() {
+        box-shadow: themed("card_shadow");
+      }
+    }
+
+    &.border1 {
+      tr {
+        border-width: 1px 0;
+        border-style: solid;
+
+        @include theme() {
+          border-color: themed("border_color");
+        }
+      }
+    }
+
+    &.border2 {
+      tr {
+        th,
+        td {
+          border: 1px solid;
+
+          @include theme() {
+            border-color: themed("border_color");
+          }
+        }
+      }
+    }
+
+    &.lines {
+      thead {
+        tr {
+          @include theme() {
+            background-color: themed("bg_color_two");
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          &:nth-of-type(even) {
+            @include theme() {
+              background-color: themed("bg_color_two");
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media #{$max_767} {
+    display: block;
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+
+      tr {
+        @include flexbox(flex, "", stretch, "", "", wrap);
+        width: 100%;
+        margin-bottom: 30px;
+        border: 0;
+
+        @include theme() {
+          box-shadow: themed("card_shadow");
+        }
+
+        td {
+          display: block;
+          width: 50%;
+          word-wrap: break-word;
+          border: 1px solid;
+
+          @include theme() {
+            border-color: themed("border_color");
+          }
+
+          &.fake-title {
+            @include appDir(font-weight, 600, font-weight, bold);
+
+            @include theme() {
+              background-color: themed("bg_color_two");
+              color: themed("t_color_one");
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+/* 6. Section Title Styles */
+/*-------------------------*/
+.section-title {
+  $border_box_width: 60px;
+  $padding_top_size: 20px;
+  $padding_bottom_size: 16px;
+  $rhombus_size: 10px;
+
+  position: relative;
+  margin-bottom: 50px;
+  padding: {
+    top: $padding_top_size;
+    bottom: $padding_bottom_size;
+  }
+  @include appDir(
+    padding-left,
+    ($border_box_width / 2),
+    padding-right,
+    ($border_box_width / 2)
+  );
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &:before {
+    top: 0;
+    @include appDir(left, 0, right, 0);
+    height: 100%;
+    width: $border_box_width;
+    border: 1px dashed $secondary;
+    @include appDir(border-right-width, 0, border-left-width, 0);
+  }
+
+  &:after {
+    top: ($padding_top_size - $rhombus_size);
+    @include appDir(
+      left,
+      ($border_box_width - (($rhombus_size / 2) + 0.5px)),
+      right,
+      ($border_box_width - (($rhombus_size / 2) + 0.5px))
+    );
+    height: $rhombus_size;
+    width: $rhombus_size;
+    background-color: $secondary;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+
+  .text {
+    position: relative;
+    z-index: 2;
+    @include appDir(text-transform, uppercase, text-transform, null);
+
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      @include appDir(
+        left,
+        (($border_box_width / 2) - 1px),
+        right,
+        (($border_box_width / 2) - 1px)
+      );
+      @include appDir(
+        border-right,
+        1px dashed $secondary,
+        border-left,
+        1px dashed $secondary
+      );
+    }
+
+    &:before {
+      top: -$padding_top_size;
+      height: ($padding_top_size - ($rhombus_size / 2));
+    }
+
+    &:after {
+      bottom: -$padding_bottom_size;
+      height: $padding_bottom_size;
+    }
+
+    .section-sub-title {
+      color: $secondary;
+      font-size: 17px;
+    }
+
+    .section-main-title {
+      font-size: 26px;
+      margin: 0;
+    }
+
+    &.bg-img {
+      .section-main-title {
+        color: $light_code;
+      }
+    }
+  }
+}

@@ -1,0 +1,507 @@
+/* 8. step-progress */
+/*------------------*/
+.step-progress {
+  $fill_bar_size: 4px;
+
+  position: relative;
+
+  .bar,
+  .fill,
+  &.history .steps:before {
+    position: absolute;
+    z-index: 1;
+    border-radius: 3px;
+  }
+
+  .fill {
+    @include theme() {
+      background-color: themed("main_color_one");
+    }
+  }
+
+  &:not(.vertical) {
+    .bar,
+    .fill,
+    &.history .steps:before {
+      top: 50%;
+      @include translateY(-50%);
+      height: $fill_bar_size;
+    }
+
+    .bar,
+    &.history .steps:before {
+      width: 100%;
+    }
+
+    &:not(.reverse) {
+      .bar,
+      .fill,
+      &.history .steps:before {
+        @include appDir(left, 0, right, 0);
+      }
+
+      .bar,
+      &.history .steps:before {
+        @include appDir(right, 0, left, 0);
+      }
+    }
+
+    &.reverse {
+      .bar,
+      .fill,
+      &.history .steps:before {
+        @include appDir(right, 0, left, 0);
+      }
+
+      .bar,
+      &.history .steps:before {
+        @include appDir(left, 0, right, 0);
+      }
+    }
+
+    .fill {
+      @include A_transition(width, 0.4s, ease-out);
+    }
+
+    .steps {
+      position: relative;
+      @include flexbox(flex, "", center, between, "", "");
+      margin-bottom: 40px;
+
+      .step {
+        @include flexbox(inline-flex, "", center, center, "", "");
+        position: relative;
+        z-index: 2;
+        margin: 0;
+        border-radius: 50%;
+        @include transition(0.4s);
+
+        &.done,
+        &.active {
+          @include theme() {
+            background-color: themed("main_color_one") !important;
+          }
+        }
+
+        strong {
+          position: absolute;
+          @include appDir(left, 50%, right, 50%);
+          @include ltr_translateX(-50%);
+          bottom: -30px;
+          width: max-content;
+
+          @include theme() {
+            color: themed("t_color_one");
+          }
+        }
+      }
+    }
+
+    &:not(.icon) {
+      .steps {
+        .step {
+          height: 40px;
+          width: 40px;
+        }
+      }
+    }
+
+    &.basic {
+      .step {
+        &:after {
+          content: attr(data-num);
+          font-size: 18px;
+          line-height: 1;
+          @include appDir(font-weight, 600, font-weight, bold);
+        }
+
+        &.done,
+        &.active {
+          &:after {
+            content: "\f00c";
+            font-family: "FontAwesome";
+            font-size: 22px;
+            line-height: 1;
+            font-weight: normal;
+
+            @include theme() {
+              color: themed("bg_color_one");
+            }
+          }
+        }
+      }
+    }
+
+    &.icon {
+      &.icon-font-awesome {
+        .step {
+          height: 60px;
+          width: 60px;
+
+          .fa {
+            font-size: 26px;
+          }
+
+          &.done,
+          &.active {
+            .fa {
+              @include theme() {
+                color: themed("bg_color_one");
+              }
+            }
+          }
+        }
+      }
+
+      &.icon-img {
+        .step {
+          height: 80px;
+          width: 80px;
+
+          img {
+            display: block;
+            width: 50px;
+          }
+
+          &:not(.done):not(.active) {
+            img {
+              filter: contrast(0);
+            }
+          }
+        }
+      }
+    }
+
+    &.history {
+      .steps {
+        margin-top: 80px;
+        margin-bottom: 30px;
+
+        &:before {
+          content: "";
+        }
+
+        .step {
+          cursor: pointer;
+
+          &:not(:last-of-type):not(:first-of-type) {
+            height: 20px;
+            width: 20px;
+          }
+
+          strong {
+            position: absolute;
+            top: -50px;
+            @include appDir(left, 50%, right, 50%);
+            @include ltr_translateX(-50%);
+            height: fit-content;
+            width: 60px;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 20px;
+            animation: fadeInDown 0.4s both;
+            display: none;
+
+            @include theme() {
+              background-color: themed("bg_color_two");
+            }
+
+            &:after {
+              content: "";
+              position: absolute;
+              @include appDir(left, 50%, right, 50%);
+              @include ltr_translateX(-50%);
+              bottom: -6px;
+              height: 6px;
+              width: 10px;
+              clip-path: polygon(50% 100%, 0 0, 100% 0);
+
+              @include theme() {
+                background-color: themed("bg_color_two");
+              }
+            }
+          }
+
+          &.active {
+            strong {
+              display: block;
+
+              @include theme() {
+                background-color: themed("main_color_one");
+                color: themed("bg_color_one");
+              }
+
+              &:after {
+                @include theme() {
+                  background-color: themed("main_color_one");
+                }
+              }
+            }
+          }
+
+          &:last-of-type,
+          &:first-of-type {
+            width: max-content;
+            height: fit-content;
+            border-radius: 20px;
+
+            strong {
+              position: static;
+              @include ltr_translate(0, 0);
+              display: block;
+
+              &:after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.vertical {
+    width: fit-content;
+
+    .bar,
+    .fill {
+      @include appDir(left, 8px, right, 8px);
+      width: $fill_bar_size;
+
+      &.fill {
+        @include A_transition(height, ease-out, 0.4s);
+      }
+    }
+
+    &:not(.reverse) {
+      .bar,
+      .fill {
+        top: 4px;
+      }
+    }
+
+    .steps {
+      width: fit-content;
+
+      .step {
+        position: relative;
+        z-index: 2;
+        width: fit-content;
+        @include appDir(padding-left, 50px, padding-right, 50px);
+
+        &:not(:last-of-type) {
+          padding-bottom: 60px;
+        }
+
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 4px;
+          @include appDir(left, 0, right, 0);
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          @include transition(0.4s);
+        }
+
+        &.done,
+        &.active {
+          &:before {
+            @include theme() {
+              background-color: themed("main_color_one") !important;
+            }
+          }
+        }
+
+        .fa {
+          font-size: 32px;
+          margin-bottom: 18px;
+
+          @include theme() {
+            color: themed("main_color_one");
+          }
+        }
+
+        img {
+          display: block;
+          width: 50px;
+          margin-bottom: 18px;
+          filter: contrast(0);
+        }
+
+        .title {
+          font-size: 20px;
+
+          &:not(:last-child) {
+            margin-bottom: 18px;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        .brief {
+          margin-bottom: 4px;
+        }
+
+        .date {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  &:not(.completed) {
+    .bar,
+    &.history .steps:before {
+      @include theme() {
+        background-color: themed("bg_color_two");
+      }
+    }
+
+    &:not(.vertical) {
+      .steps {
+        .step {
+          @include theme() {
+            background-color: themed("bg_color_two");
+          }
+
+          &.active {
+            animation: pulse 1s ease-out infinite;
+          }
+        }
+      }
+    }
+
+    &.vertical {
+      .steps {
+        .step {
+          &:before {
+            @include theme() {
+              background-color: themed("bg_color_two");
+            }
+          }
+
+          &.active {
+            &:before {
+              animation: pulse 1s ease-out infinite;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.completed {
+    .bar,
+    &.history .steps:before {
+      @include theme() {
+        background-color: themed("main_color_one");
+      }
+    }
+
+    &:not(.vertical) {
+      .steps {
+        .step {
+          @include theme() {
+            background-color: themed("main_color_one");
+          }
+        }
+      }
+
+      &.basic {
+        .step {
+          &:after {
+            content: "\f00c";
+            font-family: "FontAwesome";
+            font-size: 22px;
+            line-height: 1;
+            font-weight: normal;
+
+            @include theme() {
+              color: themed("bg_color_one");
+            }
+          }
+        }
+      }
+
+      &.icon {
+        &.icon-font-awesome {
+          .step {
+            .fa {
+              @include theme() {
+                color: themed("bg_color_one");
+              }
+            }
+          }
+        }
+
+        &.icon-img {
+          .step {
+            img {
+              filter: none !important;
+            }
+          }
+        }
+      }
+    }
+
+    &.vertical {
+      .steps {
+        .step {
+          &:before {
+            @include theme() {
+              background-color: themed("main_color_one");
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.interactive {
+    .steps {
+      .step {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.history-contents {
+  .content {
+    animation-name: contentFadeInUp;
+    animation-duration: 0.4s;
+
+    &:not(.active) {
+      display: none;
+    }
+
+    p {
+      margin: 1.8em 0 0.4em;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* animations */
+@keyframes contentFadeInUp {
+  0% {
+    opacity: 0;
+    @include translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    @include translateY(0);
+  }
+}

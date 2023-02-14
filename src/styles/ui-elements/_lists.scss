@@ -1,0 +1,53 @@
+/* 12. lists */
+/*-----------*/
+.list-styled {
+  margin: 1.5em 0;
+
+  li {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  &ol,
+  &.ordered {
+    counter-reset: li;
+
+    li {
+      &:before {
+        content: counter(li);
+        counter-increment: li;
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        @include appDir(line-height, 14px, line-height, 16px);
+        text-align: center;
+        font-size: 12px;
+        @include appDir(margin-right, 12px, margin-left, 12px);
+
+        @include theme() {
+          background-color: themed("main_color_one");
+          color: themed("bg_color_one");
+        }
+      }
+    }
+  }
+
+  &ul,
+  &:not(.ordered) {
+    li {
+      &:before {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        @include appDir(margin-right, 12px, margin-left, 12px);
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+
+        @include theme() {
+          background-color: themed("main_color_one");
+        }
+      }
+    }
+  }
+}

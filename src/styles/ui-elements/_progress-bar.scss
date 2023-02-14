@@ -1,0 +1,316 @@
+/* 9. progress-bar */
+/*-----------------*/
+
+// basic progress bar
+.progress-bar-items {
+  .item {
+    &:not(:last-of-type) {
+      margin-bottom: 30px;
+    }
+
+    .title {
+      position: relative;
+      z-index: 1;
+      color: inherit;
+      font-size: 17px;
+      margin: 0;
+
+      @include theme() {
+        color: themed("t_color_one");
+      }
+    }
+
+    .bar {
+      $margin_top_size: 8px;
+      $transition_dur: 1s;
+
+      position: relative;
+      height: 14px;
+      width: 100%;
+      padding: 1px;
+      margin-top: $margin_top_size;
+      border: 1px dashed;
+
+      @include theme() {
+        border-color: themed("main_color_two");
+      }
+
+      .count {
+        position: absolute;
+        z-index: 0;
+        @include appDir(left, 0, right, 0);
+        bottom: calc(100% + #{$margin_top_size});
+        width: 0%;
+        text-align: end;
+        @include appDir(font-family, $en_font_one, font-family, $ar_font_one);
+        white-space: nowrap;
+        animation: countFadeInUp 0.2s ease-out $transition_dur backwards;
+        display: none;
+
+        @include theme() {
+          color: themed("t_color_one");
+        }
+
+        @keyframes countFadeInUp {
+          from {
+            margin-bottom: -25px;
+            opacity: 0;
+          }
+
+          to {
+            margin-bottom: 0;
+            opacity: 1;
+          }
+        }
+      }
+
+      .fill {
+        display: block;
+        height: 100%;
+        width: 0%;
+        @include transition($transition_dur);
+
+        @include theme() {
+          background-color: themed("main_color_one");
+        }
+      }
+    }
+  }
+}
+
+// progress circle
+.progress-circle {
+  position: relative;
+  border: 0;
+
+  @include theme() {
+    border-top-color: themed("main_color_one");
+    border-bottom-color: themed("bg_color_two");
+  }
+
+  canvas {
+    display: block;
+    margin: auto;
+  }
+
+  strong {
+    position: absolute;
+    top: 50%;
+    @include appDir(left, 50%, right, 50%);
+    @include ltr_translate(-50%, -50%);
+    font-size: 24px;
+
+    @include theme() {
+      color: themed("t_color_one");
+    }
+  }
+
+  + .title {
+    text-align: center;
+    font-size: 17px;
+    margin: {
+      top: 20px;
+      bottom: 0;
+    }
+  }
+}
+
+// graph progress
+table.graph-progress {
+  border-collapse: collapse;
+
+  tr {
+    td {
+      position: relative;
+      height: 50px;
+      min-width: 40px;
+      white-space: nowrap;
+
+      &:first-of-type {
+        color: transparent;
+        @include appDir(padding-left, 0, padding-right, 0);
+
+        strong {
+          position: absolute;
+          top: 0;
+          @include translateY(-50%);
+          @include appDir(left, 0, right, 0);
+
+          @include theme() {
+            color: themed("t_color_one");
+          }
+        }
+      }
+    }
+
+    &:last-of-type {
+      td:not(:first-of-type) {
+        @include appDir(padding-left, 0, padding-right, 0);
+        @include appDir(padding-right, 0, padding-left, 0);
+
+        @include theme() {
+          color: themed("t_color_one");
+        }
+      }
+    }
+
+    &:not(:last-of-type) {
+      td {
+        &:not(:first-of-type) {
+          strong {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            @include A_transition(height, 0.6s, ease-out);
+
+            @include theme() {
+              background-color: themed("main_color_one");
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.coordinates-grid {
+    tr {
+      &:nth-last-of-type(2) {
+        td {
+          &:not(:first-of-type):not(:nth-of-type(2)) {
+            border-width: 1px 1px 2px 1px;
+            border-style: solid;
+
+            @include theme() {
+              border: {
+                top-color: themed("border_color");
+                left-color: themed("border_color");
+                right-color: themed("border_color");
+              }
+              border-bottom-color: themed("t_color_one");
+            }
+          }
+
+          &:nth-of-type(2) {
+            @include appDir(
+              border-width,
+              1px 1px 2px 2px,
+              border-width,
+              1px 2px 2px 1px
+            );
+            border-style: solid;
+
+            @include theme() {
+              border: {
+                top-color: themed("border_color");
+                bottom-color: themed("t_color_one");
+              }
+            }
+
+            @include theme("ltr") {
+              border: {
+                right-color: themed("border_color");
+                left-color: themed("t_color_one");
+              }
+            }
+
+            @include theme("rtl") {
+              border: {
+                left-color: themed("border_color");
+                right-color: themed("t_color_one");
+              }
+            }
+          }
+        }
+      }
+
+      &:not(:last-of-type):not(:nth-last-of-type(2)) {
+        td {
+          &:not(:first-of-type):not(:nth-of-type(2)) {
+            border: 1px solid;
+
+            @include theme() {
+              border-color: themed("border_color");
+            }
+          }
+
+          &:nth-of-type(2) {
+            @include appDir(
+              border-width,
+              1px 1px 1px 2px,
+              border-width,
+              1px 2px 1px 1px
+            );
+            border-style: solid;
+
+            @include theme() {
+              border: {
+                top-color: themed("border_color");
+                bottom-color: themed("border_color");
+              }
+            }
+
+            @include theme("ltr") {
+              border: {
+                right-color: themed("border_color");
+                left-color: themed("t_color_one");
+              }
+            }
+
+            @include theme("rtl") {
+              border: {
+                left-color: themed("border_color");
+                right-color: themed("t_color_one");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.coordinates-grid) {
+    tr {
+      &:nth-last-of-type(2) {
+        td {
+          &:not(:first-of-type) {
+            border-bottom: 2px solid;
+
+            @include theme() {
+              border-bottom-color: themed("t_color_one");
+            }
+          }
+
+          &:nth-of-type(2) {
+            @include appDir(border-left, 2px solid, border-right, 2px solid);
+
+            @include theme("ltr") {
+              border-left-color: themed("t_color_one");
+            }
+
+            @include theme("rtl") {
+              border-right-color: themed("t_color_one");
+            }
+          }
+        }
+      }
+
+      &:not(:last-of-type):not(:nth-last-of-type(2)) {
+        td {
+          &:nth-of-type(2) {
+            @include appDir(border-left, 2px solid, border-right, 2px solid);
+
+            @include theme("ltr") {
+              border-left-color: themed("t_color_one");
+            }
+
+            @include theme("rtl") {
+              border-right-color: themed("t_color_one");
+            }
+          }
+        }
+      }
+    }
+  }
+}

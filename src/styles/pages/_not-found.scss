@@ -1,0 +1,41 @@
+/* 7. not-found (404) Styles */
+/*---------------------------*/
+.not-found-page {
+  padding: {
+    top: 80px;
+    bottom: 80px;
+  };
+
+  .not-found-content {
+    .not-found-img {
+      @include flexbox(flex, "", "", center, column, "");
+      height: 404px;
+      width: 616px;
+      background: url("../assets/images/not-found-bg-shape.png") center no-repeat;
+      background-size: 100%;
+      text-align: center;
+      margin: auto;
+
+      @media #{$max_767} {
+        width: 100%;
+      }
+
+      h3 {
+        width: 100%;
+        font-size: 64px;
+        margin: 0;
+      }
+
+      h4 {
+        width: 100%;
+        font-size: 26px;
+        margin: 30px 0 0;
+      }
+    }
+
+    .btns-container {
+      text-align: center;
+      margin-top: 80px;
+    }
+  }
+}
